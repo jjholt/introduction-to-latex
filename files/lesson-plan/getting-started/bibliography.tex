@@ -6,7 +6,7 @@ Using it has two distinct moments: Adding an entry to our bibliography, and citi
 A bibliography file has a \verb|.bib| extension, and each entry has a very specific format.
 Let's start with creating the file \verb|bibliography.bib|, so our working directory looks like this:
 \begin{verbatim}
-    Example
+Example
 ├── bibliography.bib
 └── example.tex
 \end{verbatim}
@@ -66,8 +66,6 @@ The \verb|natbib| package gives us the \verb|bibliographystyle{unsrtnat}| option
 There are others, as well as more information on \verb|natbib|, which you can find more about on \href{https://ftp.eq.uc.pt/software/TeX/macros/latex/contrib/natbib/natnotes.pdf}{this} link. 
 
 A really important feature is that the editor even suggests the authors we have added to our \verb|.bib| file.
-Automatically generating numbers for figures, tables and correcting any citations is a key feature of LaTeX.
-This means we can easily refer to a figure, move it around and it will correctly choose its number.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/intellisense.png}
@@ -75,4 +73,6 @@ This means we can easily refer to a figure, move it around and it will correctly
   \label{fig:intellisense}
 \end{figure}
 
-Before we get into adding figures, tables, cross-referencing, etc, it is a great idea to take a detour and discuss organisation.
+Automatically generating numbers for figures, tables and correcting any citations is a key feature of \LaTeX.
+This means we can easily refer to a figure, move it around and it will correctly choose its number.
+Before we get into adding all that it is a great idea to take a detour and discuss organisation.
