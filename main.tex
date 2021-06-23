@@ -1,11 +1,14 @@
-\documentclass[12pt,a4paper,oneside]{book}
+\documentclass[12pt,oneside]{report}
 \usepackage[letterpaper]{geometry}
 \geometry{top=1.0in, bottom=1.0in, left=1.0in, right=1.0in}
 \usepackage{setspace} \doublespacing
 \usepackage{titlesec}
+
+\titleformat{\chapter}[block]{\huge\bfseries}{}{0.1ex}{}[]
+
 % \newcommand{\sectionbreak}{\clearpage}
 \usepackage[titletoc]{appendix}
-
+\usepackage{tcolorbox}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable, booktabs, array}
 \pgfplotsset{compat=1.16}
@@ -38,11 +41,21 @@
 % Not required packages. Read description!
 \usepackage{circuitikz} %Electric circuits
 \usepackage{siunitx} %SI units formatting
-
+\usepackage{blindtext}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pmboxdraw}
 \begin{document}
 	\tableofcontents
-	\part{Learning outcomes}
-		\subimport{files/}{learning-outcomes}
-	\part{Lesson Plan}
+	% \part{Learning outcomes}
+	% 	\subimport{files/}{learning-outcomes}
+	% \part{Lesson Plan}
 		\subimport{files/}{lesson-plan}
 \end{document}
