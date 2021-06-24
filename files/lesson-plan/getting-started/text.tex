@@ -57,16 +57,19 @@ The \verb|report| class also offers \verb|\chapter(*){}| and \verb|\part(*){}|, 
 
 \begin{lstlisting}
 \textit{Italics}, \underline{underline}, \textbf{bold}.
-\textit{Emphasis switches from italics to \emph{normal}} and \emph{vice-versa} based on context.
+\textit{Emphasis switches from ``italics'' to \emph{normal}} and \emph{vice-versa} based on context.
 \texttt{And we can even get monospace!}
 \end{lstlisting}
 Results in: \\
 \textit{Italics}, \underline{underline}, \textbf{bold}.
-\textit{Emphasis switches from italics to \emph{normal}} and \emph{vice-versa} based on context.
+\textit{Emphasis switches from ``italics'' to \emph{normal}} and \emph{vice-versa} based on context.
 \texttt{And we can even get monospace!}\\
 
 VSCode has a shortcut for these, so you don't need to remember the exact keyword. \verb|Ctrl+L| to initiate a LaTeX command, then \verb|Ctrl+| the first letter of the command --- \verb|Ctrl+i|, \verb|Ctrl+b|, \verb|Ctrl+u|, \verb|Ctrl+e| or \verb|Ctrl+t|, respectively.
 So for bold, you would press is \verb|Ctrl+L+Ctrl+B|.
 For Mac, just replace \verb|Ctrl| for \verb|Cmd|.
+
+Quotations are done with \verb|``text here''|.
+When you type \verb|`|, the editor will automatically insert \verb|'|.
 
 \paragraph{Note:} Generally the suggestion is to use \verb|\emph{}| over \verb|\textit{}|. Think of it as a ``generic highlighter'' that you can modify with default behaviour to \emph{italicise}, but you could make it change colours or font size or anything else.
