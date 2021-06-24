@@ -1,2 +1,132 @@
-So far our examples have been extremely short, but imagine having dozens of chapters with dozens of packages and whatever configuration is necessary for them.
-One thing we can do is split 
+So far our examples have been extremely short, but imagine having dozenschapters with dozens of packages and whatever configuration is necessary for them.
+One thing we can do is split up our document into the \emph{preamble}, the file \verb|main.tex|, where we have all the setup, and the \emph{content}.
+The content can be split up whichever way you see fit --- with the more complicated it is, the more you can split it up. 
+
+Let's expand our working directory, wherein we are typesetting three sections of our article. This is \verb|Example2| .
+
+\paragraph{Note:}
+Don't worry too much about minor details.
+Templates cover most of the usual needs, important is just understanding the motivation, so you can use/edit solutions you find on the internet.
+\begin{verbatim}
+Example2
+├── bibliography.bib
+├── main.pdf
+├── main.tex
+├── code
+│   └── code.m
+├── figures
+│   └── gradient-circle.png
+└── files
+    ├── introduction.tex
+    ├── animal-rights.tex
+    └── animal-lefts.tex
+\end{verbatim}
+
+Let's first take a look at our preamble file, \verb|main.tex|.
+\lstinputlisting[language=tex, caption={\texttt{main.tex}}]{files/lesson-plan/getting-started/Example2/example.tex}
+
+\verb|\usepackage{geometry}| and its command \verb|\geometry{}| allows us to set each margin individually.
+APA styling suggests 1 inch all around, but you may need to adjust the left margin if you are binding your thesis.
+
+The package \verb|setspace| and its command \verb|\doublespacing| provides automatic double spacing.
+
+To ``inject'' the contents of another file into our preamble, the \verb|import| package gives us \verb|\subimport{}{}|.
+The first bracket requires a relative path starting from the root of your working directory, and the second bracket is the name of the file.
+
+VSCode will help you navigate the folders and find the files.
+As you star typing \verb|\subimport| it will offer the command as a suggestion.
+Select it by pressing \verb|tab|, navigate to choose the folder called \verb|files/|, then press \verb|tab| to select.
+Press \verb|tab| again to move to the second set of brackets. If it doesn't display options, press \verb|ctrl+space|, and you can pick the file.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/subimport.png}
+    \caption{Intellisense-assisted picking files.}
+    \label{fig:animal-lefts}
+\end{figure}
+
+Finally, the \verb|tikz| package is what we use for mathematical drawing, graphing, importing pictures, and much more.
+It will be used plenty in the coming section.
+
+The biggest advantage of this separation is that each content file has absolutely no configuration at all.
+This is called \emph{Separation of concerns}, and it allows us to just focus on the content, and all of the setting up comes from a template with minor tweaks.
+Our \verb|introduction.tex| file, then, looks like this:
+\lstinputlisting[language=tex, caption={\texttt{introduction.tex}}]{files/lesson-plan/getting-started/Example2/files/introduction.tex}
+With the output:
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.7\textwidth]{figures/figures.png}
+    \label{fig:figures}
+\end{figure}
+
+\subsubsection{Figure and caption}
+\verb|\begin{figure}...\end{figure}| creates a figure \emph{environment}.
+\LaTeX tries to find the best position for every environment, but you can force their position by passing the option \verb|[h]|.
+Usually contents are left-adjusted, so we can push the environment to the centre by using \verb|\centering|.
+\verb|\caption{}| automatically numbers sequentially.
+
+\verb|tikz| provides the \verb|\includegraphics{}| command that imports our picture.
+Often we need to scale pictures, which can be achieved with the options \verb|width=0.5\textwidth| or \verb|scale=0.8|.
+\verb|\textwidth| is a \LaTeX\ variable which automatically calculates the usable size of your document.
+So in order to scale the picture to 0.5 of the textwidth, we would use:
+\begin{lstlisting}
+\includegraphics[width=0.5\textwidth]{figures/gradient-cicle.png}
+\end{lstlisting}
+
+\subsubsection{Label and cross-reference}
+The \verb|\label{}| command is paired with \verb|\ref{}| for automatic cross-referencing across any file of our document.
+Take a look at our \verb|animal-rights.tex| file.
+We are able to reference both the table in this file and the figure in another file, so it's important to be very explicit with our labels, so you can actually find them!
+The suggestion is to use \verb|fig:file-name| for figures, \verb|eq:name| for equations, and so on.
+This way you can ``filter'' while you navigate through the suggested names.
+
+\lstinputlisting[language=tex, caption={\texttt{animal-rights.tex}}]{files/lesson-plan/getting-started/Example2/files/animal-rights.tex}
+which looks like this:
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.8\textwidth]{figures/tables.png}
+    \label{fig:tables}
+\end{figure}
+
+\subsubsection{Creating a table}
+\verb|\begin{table}...\end{table}| creates a table \emph{environment}, which is different from creating a table itself.
+\verb|table| has similar properties to \verb|figure|, allowing you to set a caption, label and position.
+
+\verb|tabular|, on the other hand, creates a table. This is always followed with curly brackets deciding the \textbf{number of columns}, the \textbf{adjustment} of the text and whether there are \textbf{vertical dividers}.
+\verb!{r|lc}! means a right-adjusted column with a vertical divider, a left-adjusted column, and a centre-adjusted column.
+
+Each column is separated by \verb|&| and each row is separated by \verb|\\|. \verb|\hline| is used to produce a horizontal line that separates titles from content.
+\paragraph{Note:} As you may have noticed, some characters have special meaning, like \&, \{, \} and \textbackslash. To display the literal symbol, it needs to be \emph{escaped} by a preceeding \verb|\|, like this: \verb|\&|, \verb|\{|, etc. The backslash is an exception, because \verb|\\| is also a special character, so you have to use \verb|\textbackslash|.
+
+\subsubsection{Lists}
+There are two types of lists: numbered and unnumbered, and these are \verb|enumerate| and \verb|itemize| environments, respectively.
+Take a look at the code in \verb|animal-lefts.tex|.
+
+\lstinputlisting[language=tex, caption={animal-lefts.tex}]{files/lesson-plan/getting-started/Example2/files/animal-lefts.tex}
+
+Resulting in:
+
+\begin{figure}[h]
+    \centering
+        \includegraphics[scale=0.8]{figures/list.png}
+    \label{fig:list}
+\end{figure}
+
+A new entry is only created with \verb|\item|, so you can have as much code between entries as you want, including other environments and nestings of \verb|enumerate|, like this:
+\begin{lstlisting}
+\begin{enumerate}
+    \item First question
+        \begin{enumerate}
+            \item Sub question
+                \begin{enumerate}
+                    \item Item on subquestion
+                \end{enumerate}
+    \end{enumerate}
+    \item Second question
+\end{enumerate}
+\end{lstlisting}
+Resulting in:
+\begin{figure}[h]
+    \centering
+        \includegraphics[]{figures/list-nested.png}
+    \label{fig:list-nested}
+\end{figure}

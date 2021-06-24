@@ -1,7 +1,6 @@
 The tool that allows us to easily manage bibliography is called BiBTeX. In particular, we are using a \emph{package} called \verb|natbib| that gives us some extra features.
 Using it has two distinct moments: Adding an entry to our bibliography, and citing.
 
-\clearpage
 \subsection{Creating a bibiliography}
 A bibliography file has a \verb|.bib| extension, and each entry has a very specific format.
 Let's start with creating the file \verb|bibliography.bib|, so our working directory looks like this:
@@ -38,12 +37,18 @@ When you find an article through UCL's library, JAMA, Science Direct and many ot
 Simply copy the contents to your bibliography file and you're ready to cite!
 
 \subsection{Manually adding a bibliography entry}
-While using VSCode, you can scaffold a bibliography entry in a \verb|.bib| file.
-Simply type \verb|@| and press \verb|Ctrl+space|, and it will generate the skeleton for an entry.
+While in a \verb|.bib| file, you can easily create the skeleton for a bibliography entry.
+Simply type \verb|@| and press \verb|Ctrl+space|, it will give you suggestions.
 Generally this is only used for citing random websites, so you will want to pick the \verb|@misc| option.
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=\textwidth]{figures/bib-entry.png}
+  \caption{Autocompleting a bibliography entry in a \texttt{.bib} file.}
+  \label{fig:bib-entry}
+\end{figure}
 
 \subsection{Citations}
-Now we just need to let our document know where to find our bibliography file and we can use \verb|\cite{}| to include citations.
+Now we just need to let our document know where to find our bibliography file and we can use \verb|\cite{}| (or its variants) to include citations.
 Every entry that that is cited, automatically gets added to a Reference section at the end of your document.
 \lstinputlisting[language=tex, caption={example.tex}]{"Example/example.tex"}
 
@@ -54,7 +59,7 @@ Giving us the following output:
   \label{fig:references}
 \end{figure}
 
-\verb|\usepackage[square,numbers]{natbib}| is what determines that in-text citations is \textbf{[1]}.
+The options in \verb|\usepackage[square,numbers]{natbib}| are what determine that in-text citations is \textbf{[1]}.
 Alternatively if you prefer \textbf{(Gerber et al, 2005)}, use \verb|\usepackage[round]{natbib}|, and \verb|\citep{}| (see code below).
 It is also possible to do narrative style citations, such as ``In their work, Gerber et al (2005) describe\dots''. This is achieved with \verb|\cite{}| with this same setting.
 
@@ -68,7 +73,8 @@ The \verb|natbib| package gives us the \verb|bibliographystyle{unsrtnat}| option
 There are other styles, as well as more information on \verb|natbib| on \href{https://ftp.eq.uc.pt/software/TeX/macros/latex/contrib/natbib/natnotes.pdf}{this} link. 
 
 A really important feature of VSCode is Intellisense, these automatic sugggestions of authors (and more), which it finds from our \verb|.bib| file.
-If you are not getting suggestions, try pressing \verb|ctrl+space|.
+If you are not getting suggestions, try activating Intellisense by pressing \verb|ctrl+space|.
+It also works with normal commands and tags starting with \texttt{\textbackslash}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/intellisense.png}

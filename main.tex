@@ -1,7 +1,8 @@
-\documentclass[12pt,oneside]{report}
-\usepackage[letterpaper]{geometry}
+\documentclass[oneside]{report}
+\usepackage{geometry}
 \geometry{top=1.0in, bottom=1.0in, left=1.0in, right=1.0in}
-\usepackage{setspace} \doublespacing
+\usepackage{setspace}
+\doublespacing
 \usepackage{titlesec}
 
 \titleformat{\chapter}[block]{\huge\bfseries}{}{0.1ex}{}[]
@@ -24,9 +25,7 @@
 \usepackage{listings}
 \lstset{
 	numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
-	% columns=fullflexible,
-	basicstyle = \scriptsize,
-	% stringstyle = \ttfamily, %Monospaced
+	basicstyle = \scriptsize\ttfamily, %
 }
 
 \usepackage{pdfpages}
