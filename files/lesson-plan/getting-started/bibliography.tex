@@ -55,7 +55,9 @@ Giving us the following output:
 \end{figure}
 
 \verb|\usepackage[square,numbers]{natbib}| is what determines that in-text citations is \textbf{[1]}.
-Alternatively if you prefer \textbf{(Gerber et al, 2005)}, use \verb|\usepackage[round]{natbib}|, and \verb|\citep{}| instead of \texttt{\textbackslash cite\{\}}:
+Alternatively if you prefer \textbf{(Gerber et al, 2005)}, use \verb|\usepackage[round]{natbib}|, and \verb|\citep{}| (see code below).
+It is also possible to do narrative style citations, such as ``In their work, Gerber et al (2005) describe\dots''. This is achieved with \verb|\cite{}| with this same setting.
+
 \begin{lstlisting}
 \usepackage[round]{natbib}
 ...
@@ -63,9 +65,10 @@ Alternatively if you prefer \textbf{(Gerber et al, 2005)}, use \verb|\usepackage
 \end{lstlisting}
 
 The \verb|natbib| package gives us the \verb|bibliographystyle{unsrtnat}| option, which determines the style of the references.
-There are others, as well as more information on \verb|natbib|, which you can find more about on \href{https://ftp.eq.uc.pt/software/TeX/macros/latex/contrib/natbib/natnotes.pdf}{this} link. 
+There are other styles, as well as more information on \verb|natbib| on \href{https://ftp.eq.uc.pt/software/TeX/macros/latex/contrib/natbib/natnotes.pdf}{this} link. 
 
-A really important feature is that the editor even suggests the authors we have added to our \verb|.bib| file.
+A really important feature of VSCode is Intellisense, these automatic sugggestions of authors (and more), which it finds from our \verb|.bib| file.
+If you are not getting suggestions, try pressing \verb|ctrl+space|.
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/intellisense.png}
