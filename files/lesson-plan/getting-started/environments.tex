@@ -1,3 +1,4 @@
+\subsection{Staying Organised}
 So far our examples have been extremely short, but imagine having dozenschapters with dozens of packages and whatever configuration is necessary for them.
 One thing we can do is split up our document into the \emph{preamble}, the file \verb|main.tex|, where we have all the setup, and the \emph{content}.
 The content can be split up whichever way you see fit --- with the more complicated it is, the more you can split it up. 
@@ -58,7 +59,7 @@ With the output:
     \label{fig:figures}
 \end{figure}
 
-\subsubsection{Figure and caption}
+\subsection{Figure and caption}
 \verb|\begin{figure}...\end{figure}| creates a figure \emph{environment}.
 \LaTeX tries to find the best position for every environment, but you can force their position by passing the option \verb|[h]|.
 Usually contents are left-adjusted, so we can push the environment to the centre by using \verb|\centering|.
@@ -72,7 +73,7 @@ So in order to scale the picture to 0.5 of the textwidth, we would use:
 \includegraphics[width=0.5\textwidth]{figures/gradient-cicle.png}
 \end{lstlisting}
 
-\subsubsection{Label and cross-reference}
+\subsection{Label and cross-reference}
 The \verb|\label{}| command is paired with \verb|\ref{}| for automatic cross-referencing across any file of our document.
 Take a look at our \verb|animal-rights.tex| file.
 We are able to reference both the table in this file and the figure in another file, so it's important to be very explicit with our labels, so you can actually find them!
@@ -87,7 +88,7 @@ which looks like this:
     \label{fig:tables}
 \end{figure}
 
-\subsubsection{Creating a table}
+\subsection{Table}
 \verb|\begin{table}...\end{table}| creates a table \emph{environment}, which is different from creating a table itself.
 \verb|table| has similar properties to \verb|figure|, allowing you to set a caption, label and position.
 
@@ -97,7 +98,7 @@ which looks like this:
 Each column is separated by \verb|&| and each row is separated by \verb|\\|. \verb|\hline| is used to produce a horizontal line that separates titles from content.
 \paragraph{Note:} As you may have noticed, some characters have special meaning, like \&, \{, \} and \textbackslash. To display the literal symbol, it needs to be \emph{escaped} by a preceeding \verb|\|, like this: \verb|\&|, \verb|\{|, etc. The backslash is an exception, because \verb|\\| is also a special character, so you have to use \verb|\textbackslash|.
 
-\subsubsection{Lists}
+\subsection{Lists}
 There are two types of lists: numbered and unnumbered, and these are \verb|enumerate| and \verb|itemize| environments, respectively.
 Take a look at the code in \verb|animal-lefts.tex|.
 
@@ -130,3 +131,26 @@ Resulting in:
         \includegraphics[]{figures/list-nested.png}
     \label{fig:list-nested}
 \end{figure}
+
+\subsection{Code}
+The package \verb|listings| allows presenting code in the exact way it is seen in this document.
+The appearance of the frame can be changed greatly, and \texttt{listings} is very well documented \href{https://texdoc.org/serve/listings.pdf/0}{here}.
+Generally, stick to the options presented in the preamble and in the templates, and it will cover most of your needs, namely:
+\begin{lstlisting}
+\lstset{
+	numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
+	basicstyle = \scriptsize\ttfamily, %smaller size, monospaced
+}
+\end{lstlisting}
+
+If you are looking for highlighting in the same way you'd find in your editor, look for the package \texttt{minted}.
+It requires a fair bit of setup, so it will not be covered here.
+
+We have the option of writing out the code in the file inside the \verb|lstlisting| environment or import from file with \verb|\lstinputlisting{}|. Try it for yourself! Remember that an environment is always \verb|\begin{environment-name}|\dots\verb|\end{environment-name}|.
+\begin{lstlisting}
+    \lstinputlisting[language=Matlab, caption={caption-here}, label={label-here}]{code/code.m}
+\end{lstlisting}
+
+\paragraph{Note:}
+The \texttt{verbatim} environment, \verb!\verb||! and \verb|\texttt{}| produce monospaced fonts as well, and there are moments when each one is appropriate.
+Generally \verb!\verb||! (which can also be done with \verb|\verb!!|) escapes every character inside the \verb!|!\dots\verb!|! and is what one would use for short in-text code snippets which might interfere .

@@ -4,6 +4,13 @@
 \usepackage{setspace} \doublespacing
 \usepackage{import}
 \usepackage{tikz}
+
+\usepackage{listings}
+\lstset{
+	numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
+	basicstyle = \scriptsize\ttfamily, %smaller size, monospaced
+}
+
 \begin{document}
 \section{Introduction}
     \subimport{files/}{introduction.tex}
