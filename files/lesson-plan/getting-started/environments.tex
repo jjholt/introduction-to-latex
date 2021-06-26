@@ -1,13 +1,10 @@
 \subsection{Staying Organised}
-So far our examples have been extremely short, but imagine having dozenschapters with dozens of packages and whatever configuration is necessary for them.
+So far our examples have been extremely short, but imagine having dozens of chapters with dozens of packages and whatever configuration is necessary for them.
 One thing we can do is split up our document into the \emph{preamble}, the file \verb|main.tex|, where we have all the setup, and the \emph{content}.
-The content can be split up whichever way you see fit --- with the more complicated it is, the more you can split it up. 
+The content can be split up whichever way you see fit --- with the more complicated it is, the more you would want to split it up. 
 
-Let's expand our working directory, wherein we are typesetting three sections of our article. This is \verb|Example2| .
-
-\paragraph{Note:}
-Don't worry too much about minor details.
-Templates cover most of the usual needs, important is just understanding the motivation, so you can use/edit solutions you find on the internet.
+Let's expand our working directory like seen below. You can also just copy the files from \verb|Example2| .
+\clearpage
 \begin{verbatim}
 Example2
 ├── bibliography.bib
@@ -24,15 +21,22 @@ Example2
 \end{verbatim}
 
 Let's first take a look at our preamble file, \verb|main.tex|.
+
 \lstinputlisting[language=tex, caption={\texttt{main.tex}}]{files/lesson-plan/getting-started/Example2/example.tex}
 
 \verb|\usepackage{geometry}| and its command \verb|\geometry{}| allows us to set each margin individually.
-APA styling suggests 1 inch all around, but you may need to adjust the left margin if you are binding your thesis.
+APA styling suggests 1 inch all around, but you may need to adjust the left margin for binding a thesis.
 
 The package \verb|setspace| and its command \verb|\doublespacing| provides automatic double spacing.
 
+The package \verb|listings| allows presenting code in the exact way it is seen in this document. We will discuss it more in the coming sections.
+
+The \verb|tikz| package is what we use for mathematical drawing, graphing, importing pictures, and much more.
+We will discuss it more in the coming sections.
+
 To ``inject'' the contents of another file into our preamble, the \verb|import| package gives us \verb|\subimport{}{}|.
 The first bracket requires a relative path starting from the root of your working directory, and the second bracket is the name of the file.
+You can include a \verb|\subimport{}{}| in a file that has itself been \texttt{subimport}ed, and this is the key to organisation.
 
 VSCode will help you navigate the folders and find the files.
 As you star typing \verb|\subimport| it will offer the command as a suggestion.
@@ -45,23 +49,24 @@ Press \verb|tab| again to move to the second set of brackets. If it doesn't disp
     \label{fig:animal-lefts}
 \end{figure}
 
-Finally, the \verb|tikz| package is what we use for mathematical drawing, graphing, importing pictures, and much more.
-It will be used plenty in the coming section.
-
 The biggest advantage of this separation is that each content file has absolutely no configuration at all.
 This is called \emph{Separation of concerns}, and it allows us to just focus on the content, and all of the setting up comes from a template with minor tweaks.
+
+\subsection{Figure and caption}
 Our \verb|introduction.tex| file, then, looks like this:
 \lstinputlisting[language=tex, caption={\texttt{introduction.tex}}]{files/lesson-plan/getting-started/Example2/files/introduction.tex}
-With the output:
+
+With the output as seen in Figure \ref{fig:figures}
+
 \begin{figure}[h]
     \centering
         \includegraphics[width=0.7\textwidth]{figures/figures.png}
+    \caption{Output from \texttt{introduction.tex}}
     \label{fig:figures}
 \end{figure}
 
-\subsection{Figure and caption}
 \verb|\begin{figure}...\end{figure}| creates a figure \emph{environment}.
-\LaTeX tries to find the best position for every environment, but you can force their position by passing the option \verb|[h]|.
+\LaTeX\ tries to find the best position for every environment, but you can force their position by passing the option \verb|[h]|.
 Usually contents are left-adjusted, so we can push the environment to the centre by using \verb|\centering|.
 \verb|\caption{}| automatically numbers sequentially.
 
@@ -73,12 +78,26 @@ So in order to scale the picture to 0.5 of the textwidth, we would use:
 \includegraphics[width=0.5\textwidth]{figures/gradient-cicle.png}
 \end{lstlisting}
 
+\paragraph{Note: }
+Occasionally weneed to put two pictures side-by-side. How would you achieve that? The simplest way is to include both within the same \verb|figure| environment and make sure their widths are less than half of the allowable text width: \verb|width=0.5\textwidth|.
+If you need captions on each subfigure, then you are looking for the package \verb|subcaption|, and you can find more information \href{http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/caption/subcaption.pdf}{here}.
+
+\begin{lstlisting}{tex}
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.49\textwidth]{figures/pic1.png}
+    \includegraphics[width=0.49\textwidth]{figures/pic2.png}
+\caption{Two pictures in one figure environment}
+\label{fig:pic1-pic2}
+\end{figure}
+\end{lstlisting}   
+
 \subsection{Label and cross-reference}
 The \verb|\label{}| command is paired with \verb|\ref{}| for automatic cross-referencing across any file of our document.
-Take a look at our \verb|animal-rights.tex| file.
-We are able to reference both the table in this file and the figure in another file, so it's important to be very explicit with our labels, so you can actually find them!
+From the \verb|animal-rights.tex| file we are able to reference both the table in this file and the figure in \verb|introduction.tex|.
+This makes it important to be very explicit with our labels, so you can actually find them!
 The suggestion is to use \verb|fig:file-name| for figures, \verb|eq:name| for equations, and so on.
-This way you can ``filter'' while you navigate through the suggested names.
+With larger documents, you may even want to include chapter references to you can ``filter'' the names: \verb|fig:ch6:dog-with-tail|.
 
 \lstinputlisting[language=tex, caption={\texttt{animal-rights.tex}}]{files/lesson-plan/getting-started/Example2/files/animal-rights.tex}
 which looks like this:
@@ -113,6 +132,7 @@ Resulting in:
 \end{figure}
 
 A new entry is only created with \verb|\item|, so you can have as much code between entries as you want, including other environments and nestings of \verb|enumerate|, like this:
+\clearpage
 \begin{lstlisting}
 \begin{enumerate}
     \item First question
@@ -133,9 +153,10 @@ Resulting in:
 \end{figure}
 
 \subsection{Code}
-The package \verb|listings| allows presenting code in the exact way it is seen in this document.
+As mentioned earlier, the package \verb|listings| creates an environment to present code in the exact way it is seen in this document.
 The appearance of the frame can be changed greatly, and \texttt{listings} is very well documented \href{https://texdoc.org/serve/listings.pdf/0}{here}.
 Generally, stick to the options presented in the preamble and in the templates, and it will cover most of your needs, namely:
+
 \begin{lstlisting}
 \lstset{
 	numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
@@ -144,13 +165,20 @@ Generally, stick to the options presented in the preamble and in the templates, 
 \end{lstlisting}
 
 If you are looking for highlighting in the same way you'd find in your editor, look for the package \texttt{minted}.
-It requires a fair bit of setup, so it will not be covered here.
+It requires a bit of setup, but you can find more information \href{http://tug.ctan.org/macros/latex/contrib/minted/minted.pdf}{here}.
 
-We have the option of writing out the code in the file inside the \verb|lstlisting| environment or import from file with \verb|\lstinputlisting{}|. Try it for yourself! Remember that an environment is always \verb|\begin{environment-name}|\dots\verb|\end{environment-name}|.
+We have the option of manually writing the code in-file with the \verb|lstlisting| environment.
+Try writing in-file for yourself!
+Tip: An environment is always \verb|\begin{environment-name}|\dots\verb|\end{environment-name}|.
+
+It is also possible to import from another file with \verb|\lstinputlisting{}|, and you can see an example of it below.
+Don't worry about remembering it exactly --- you will always be able to check documentation, the internet, or as we will describe at the end of this, use a \emph{snippet}.
+Snippets are the key to typesetting documents incredibly fast, and will be covered extensively in the end.
+   
 \begin{lstlisting}
-    \lstinputlisting[language=Matlab, caption={caption-here}, label={label-here}]{code/code.m}
+    \lstinputlisting[language=Matlab, caption={My Example code}, label={code:matrix}]{code/code.m}
 \end{lstlisting}
 
 \paragraph{Note:}
 The \texttt{verbatim} environment, \verb!\verb||! and \verb|\texttt{}| produce monospaced fonts as well, and there are moments when each one is appropriate.
-Generally \verb!\verb||! (which can also be done with \verb|\verb!!|) escapes every character inside the \verb!|!\dots\verb!|! and is what one would use for short in-text code snippets which might interfere .
+Generally \verb!\verb||! (which can also be done with \verb|\verb!!|) escapes every character inside the \verb!|!\dots\verb!|! and is what one would use for in-text code which might interfere with \LaTeX\ itself.
