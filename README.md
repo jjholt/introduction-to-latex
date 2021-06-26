@@ -1,6 +1,6 @@
 # Introduction to LaTeX 
-
-A simple introduction to LaTeX for UCL's engineering faculty 
+A simple introduction to LaTeX for UCL's engineering faculty
+ 
 ----------
 # Learning Objectives
 ## General Understanding
