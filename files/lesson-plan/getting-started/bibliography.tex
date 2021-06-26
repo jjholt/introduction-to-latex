@@ -27,19 +27,26 @@ Each entry has a source, whether \verb|article|, \verb|book|, \verb|misc| or man
 \end{lstlisting}
 
 It's worth highlighting that the basic format is essentially \verb|@article{ID,...}|, with each entry being separated by commas.
-BiBTeX will handle ``et al'' and other conventions as long as you stick to the following format:
+BiBTeX will handle ``et al'' and other conventions as long as you stick to the following format for the author:
 \begin{lstlisting}
-author = {LastName1, FirstName1 and LastName2, FirstName2 and...}
+author = {LastName1, FirstName1 and LastName2, FirstName2 and...},
 \end{lstlisting}
 
 The good side is that you rarely, if ever, need to type it out yourself.
 When you find an article through UCL's library, JAMA, Science Direct and many other resources, there will be an option to \textbf{export citation to BiBTeX}.
 Simply copy the contents to your bibliography file and you're ready to cite!
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ucl-lib.png}
+  \caption{Getting a BiBTeX file from UCL's Library. From here, just paste to your \texttt{.bib} file.}
+  \label{fig:ucl-lib}
+\end{figure}
 
 \subsection{Manually adding a bibliography entry}
-While in a \verb|.bib| file, you can easily create the skeleton for a bibliography entry.
-Simply type \verb|@| and press \verb|Ctrl+space|, it will give you suggestions.
-Generally this is only used for citing random websites, so you will want to pick the \verb|@misc| option.
+While in a \verb|.bib| file, you can easily create a scaffold for a bibliography entry.
+Simply type \verb|@| and press \verb|Ctrl+space| to see the suggestions.
+Generally this is only used for citing random websites, for which we use the \verb|@misc| option.
+The scaffold will include all the basic requirements to generate a good bibiliography entry.
 \begin{figure}[h]
   \centering
     \includegraphics[width=\textwidth]{figures/bib-entry.png}
@@ -48,8 +55,9 @@ Generally this is only used for citing random websites, so you will want to pick
 \end{figure}
 
 \subsection{Citations}
-Now we just need to let our document know where to find our bibliography file and we can use \verb|\cite{}| (or its variants) to include citations.
-Every entry that that is cited, automatically gets added to a Reference section at the end of your document.
+Now we just need to let our document know where to find our bibliography file, which we had called \verb|bibliography.bib| and we can use \verb|\cite{}| (or its variants) to do in-text citations.
+Every cited entry automatically gets added to a Reference section at the end of the document.
+If you want to include any non-cited entry, use \verb|\nocite{id}|; and to include all entries: \verb|\nocite{*}|.
 \lstinputlisting[language=tex, caption={example.tex}]{"Example/example.tex"}
 
 Giving us the following output:
@@ -67,21 +75,27 @@ It is also possible to do narrative style citations, such as ``In their work, Ge
 \usepackage[round]{natbib}
 ...
 \citep{GerberLeahR2005}
+...
+In their work, \cite{GerberLeahR2005} describe...
 \end{lstlisting}
 
-The \verb|natbib| package gives us the \verb|bibliographystyle{unsrtnat}| option, which determines the style of the references.
+The \verb|natbib| package gives us the \verb|\bibliographystyle{unsrtnat}| command, which determines the style of the references.
 There are other styles, as well as more information on \verb|natbib| on \href{https://ftp.eq.uc.pt/software/TeX/macros/latex/contrib/natbib/natnotes.pdf}{this} link. 
 
-A really important feature of VSCode is Intellisense, these automatic sugggestions of authors (and more), which it finds from our \verb|.bib| file.
+\paragraph{Note:}
+When citing you may want to include a tilde (\verb|~|) between the last word and \verb|\cite{}|. This guarantees that the citation and the word are on the same line. Like so: \verb|Tomorrow is a day~\cite{GerberLeahR2005}|.
+
+A really important feature of VSCode is Intellisense, these automatic suggestions the editor finds depending on context.
+In the case of bibliography, it looks in the \verb|.bib| file we indicate in the preamble, as you can see in Figure \ref{fig:intellisense}.
 If you are not getting suggestions, try activating Intellisense by pressing \verb|ctrl+space|.
-It also works with normal commands and tags starting with \texttt{\textbackslash}.
+It also works with various other tags. Try typing \texttt{\textbackslash}, then pressing \verb|ctrl+space| to see the enourmous list.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/intellisense.png}
-  \caption{Autocomplete from our bibliography file}
+  \includegraphics[width=0.8\textwidth]{figures/intellisense.png}
+  \caption{Autocomplete from our bibliography file.}
   \label{fig:intellisense}
 \end{figure}
 
-Automatically generating numbers for figures, tables and correcting any citations is a key feature of \LaTeX.
-This means we can easily refer to a figure, move it around and it will correctly choose its number.
+Automatically generating the number for figures and tables, and easy cross-referencing are a key feature of \LaTeX.
+This means we can refer to a bibliography entry or a figure by its unique id, move it around and it will correctly choose its number.
 Before we get into adding all that it is a great idea to take a detour and discuss organisation.
