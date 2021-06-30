@@ -1,0 +1,23 @@
+Let \( f: [a,b] \to \mathbb{R} \) be a function defined in the closed interval \( [a,b] \) and with partitions
+\begin{equation*}
+    P = \left \{ 
+        [x_0,x_1], [x_1,x_2], \dots [x_{n-1},x_n]
+     \right \}
+\end{equation*}
+such that
+\begin{equation*}
+    a = x_0 < x_1 < x_2 \dots x_n = b
+\end{equation*}
+A Riemann sum \( S \) is defined as:
+\begin{equation}
+    S = \sum_{i=1}^{n} f(x_i^*) \Delta x_i
+\end{equation}
+Now if \( f \) is integrable within the interval and \( \Delta x_i \) approaches zero, we have an integral:
+\begin{equation}
+    \int_a^b f(x) \,dx= \lim_{\Delta x_i \to 0}S = \lim_{\Delta x_i \to 0} \sum_{i=1}^{n} f(x_i^*) \Delta x_i 
+\end{equation}
+
+And finally, if \( F(x) \) is the integral of \( f(x) \), then
+\begin{equation*}
+    \int_a^b f(x) \,dx = F(x)\Big|_a^b = \Big[F(x)\Big]_a^b
+\end{equation*}

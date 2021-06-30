@@ -1,0 +1,25 @@
+Given an expression \( f(x) = x^2+5 \), the derivative, \( f'(x) \), from first principle is given by:
+
+\begin{align}
+    f'(x) &= \lim_{\delta x \to 0}
+        \frac{
+            f(x + \delta x) - f(x)
+        }{ \delta x }
+    \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            {(x + \delta x)}^2+5 - (x^2+5)
+        }{ \delta x }
+    \nonumber \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            x^2 + 2x\delta x + {\delta x}^2 +5 - (x^2+5)
+        }{ \delta x }
+    \nonumber \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            \cancel{\delta x} (2x + \delta x)
+        }{ \cancel{\delta x} }
+    \nonumber \\
+    f'(x) &= 2x 
+\end{align}
