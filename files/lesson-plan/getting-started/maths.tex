@@ -1,4 +1,310 @@
-\subsection{Equations, sums and alignment}
-\subsection{Use of variables} %Using \newcommand
-\subsection{Vectors and Matrices}
+There are two ways to create a maths environment: math mode and display mode.
+\LaTeX\ is usually in text mode, but anything between \verb|$|\dots\verb|$| or \verb|\(|\dots \verb|)\| becomes math mode\footnotemark.
+\footnotetext{The recommended use is \texttt{\textbackslash(}\dots \texttt{\textbackslash)}, but it's not handled very well in VSCode. When snippets are covered, you will see a solution, but feel free to use either.} %chktex 9
+A math environment allows subscripts, superscripts, greek letters and for most things one would associate with mathematics.
+\begin{lstlisting}
+    In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\)
+\end{lstlisting}
+
+In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\).
+
+\verb|{}| is how we indicate that everything inside the brackets should be treated together.
+The difference becomes clear with the following example: \(x^12 + x_0^2 + {x_0}^2\) generated from the code below. %chktex 25
+\begin{lstlisting}
+    \(x^12 + x_0^2 + {x_0}^2\)
+\end{lstlisting}
+
+\paragraph{Display math} can be done in several ways.
+The suggestion is to use the \verb|amsmath| package, and the \verb|align| environment.
+\texttt{align} numbers every single line, and \texttt{align*} does not.
+
+To declare a new line, use \verb|\\|, and \verb|&| defines the point in the expression (if any) for horizontal alignment.
+\begin{lstlisting}
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+    \begin{align*}
+        f(x) &= (x+1)(x-1) \cdot \left( \frac{\alpha}{\ln 5} \right)\\
+        &= x^2 - 1 \left( \frac{3}{\ln 5} \right)
+    \end{align*}
+\end{document}
+\end{lstlisting}
+\begin{align*}
+    f(x) &= (x+1)(x-1) \cdot \left( \frac{\alpha}{5} \right)\\
+    &= (x^2 - 1)  (\frac{\alpha}{5} )
+\end{align*}
+
+The usual product symbol is \verb|\cdot|. \(\times\) is produced with \verb|\times|.
+
+The pair \verb|\left( \right)| produce parenthesis that fit any vertical size.
+You will see the effect of them missing in the second expression.
+Similarly, they can be used with \verb|\left\{  \right\}| to fix the size of \verb|{}| and \verb|\left[  \right]| for \verb|[]|.
+
+Because math environments change the way letters are displayed, \verb|\ln|, \verb|\sin|, \verb|\cos|, \verb|\log|, \verb|\exp| and more can be used to produce the font as we would expect. 
+
+\verb|\frac{numerator}{denominator}| produces the fractions.
+
+\subsection{Making it easier}
+A few things become very clear: There is a whole lot of syntax to remember; it is very easy to forget something and your \texttt{pdf} won't compile; and big expressions become very complicated to keep track.
+Let's highlight how we avoid these problems.
+
+Inserting greek letters is done by typing \verb|@| followed by the first letter of the english name.
+Some special letters have a ``variable'' variant, like \(\varphi\) (variable phi) compared to \(\phi\) (phi).
+So \(\gamma\) is produced with \verb|@g|, \verb|@f|~=~\(\phi\) and \verb|@vf|~=~\(\varphi\). 
+
+Inserting brackets is made easy with VSCode snippets \verb|@(|, \verb|@[| and \verb|@{|.
+Type whichever one you want and Intellisense should popup.
+Press \verb|tab| and it will even place your cursor in the right spot.
+If you expect to put a lot inside those brackets, press \texttt{enter}, and use vertical space + identations to keep everything tidy.
+
+Finally, the snippet for fractions is \verb|@/|, and to create the unnumbered \texttt{align*} environment, type \texttt{bsal}, then \texttt{tab} --- \textbf{b}egin, \textbf{s} for unnumbered, \textbf{al}ign.
+Similar snippets exist for other environments, such as figure --- \texttt{bfi}; align --- \texttt{bal}.
+A full list can be seen \href{https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets}{here}.
+
+\subsection{Organisation}
+Let's look at a simple example 
+\begin{align*}
+    f(x) &
+        = {
+            \left( 
+                \frac{3+x}{x^{2x}}
+                + \left[ 
+                    \sqrt{x} + \sin(2x)
+                \right]
+            \right)
+        }^2
+    \\
+    &= \dots
+\end{align*}
+
+The following code describes two ``extremes'' of how split-up the code can be.
+Neither is ideal, but as we work through the next examples, it should become clear what a reasonable middleground looks like.
+\begin{lstlisting}
+f(x) &
+    = { \left( \frac{3+x}{x^{2x}} + \left[ \sqrt{x} + \sin(2x) \right \right) }^2
+\\
+&= \dots
+\end{lstlisting}
+Compared to:
+\begin{lstlisting}
+f(x) &
+    = {
+        \left( 
+            \frac{3+x}{x^{2x}}
+            + \left[ 
+                \sqrt{x} + \sin(2x)
+            \right]
+        \right)
+    }^2
+\\
+&= \dots
+\end{lstlisting}
+
+Before we move on to more complicated expressions, it's worth pointing out how to define \LaTeX\ variables.
+The motivation is similar to how you would say ``let \(a = e^x+\sqrt{3}\)'' and use \(a\) in the expressions. It becomes quite hard and tedious to write text over and over.
+
+\subsection{Variables}
+\paragraph{Defining a new variable} uses \verb|\newcommand{\command}{expression}|.
+With our example, that means \verb|\newcommand{\a}{e^x+\sqrt{3}}|.
+Now we can produce the same output by typing \verb|\a|.
+
+\paragraph{Redefining a variable} uses \verb|\renewcommand{}{}|. The point of separating the two is so that you don't accidently define/redefine a variable within the same \emph{scope}.
+Variables in \LaTeX\ are bound to their immediate environment.
+If this doesn't mean anything, just follow these two two rules:
+\begin{enumerate}
+    \item If you need it for only this (set of) equation(s) in particular, define the variable inside the \verb|align| environment.
+    \item If you need it across the whole document, set it in your preamble before the \texttt{document} environment.
+\end{enumerate}
+
+For anything else in-between, reusing a variable name may require a little trial-and-error.
+
+\begin{lstlisting}
+\begin{align} \label{eq:test}
+\newcommand{\x}{\alpha+5}
+    \x
+\end{align}
+\end{lstlisting}
+Would produce the following result, and we can refer to it by number by using \verb|\ref{eq:test}|.
+\begin{align}
+    \alpha+5
+\end{align}
+\subsection{Vectors, matrices and cases}
+Vector notation is achieved using \verb|\vec{F}|, producing \(\vec{F}\).
+If you prefer bold instead of the arrow, redefine the \verb|\vec| variable in the preamble to math bold, like so:
+\verb|\renewcommand{\vec}{\mathbf}| \(\implies \mathbf{F}\).
+
+The \verb|matrix| environment produces matrices without brackets,
+for parenthesis we would use \texttt{pmatrix}; and for square brackets, \texttt{bmatrix}.
+The syntax is similar to tables/tabular we covered earlier --- \verb|&| separate columns and \verb|\\| separate rows.
+Notice you will need to create a matrix environment inside of a math environment, like below 
+
+\begin{lstlisting}
+\begin{align*}
+    \vec{F} = \begin{bmatrix}
+        1 & 2 & 3 \\
+        3 & 2 & 1 
+    \end{bmatrix}
+    , \qquad %Long space
+    A = \begin{pmatrix}
+        1 \\ 2
+    \end{pmatrix} 
+\end{align*}
+\end{lstlisting}
+
+\begin{align*}
+    \vec{F} = \begin{bmatrix}
+        1 & 2 & 3 \\
+        3 & 2 & 1 
+    \end{bmatrix}
+    , \qquad
+    A = \begin{pmatrix}
+        1 \\ 2
+\end{pmatrix}
+\end{align*}
+
+Another important environment which has similar syntax is \verb|cases|, which looks like this:
+\begin{lstlisting}
+\begin{align*}
+    f(x) = \begin{cases}
+        1, x \geq 5 \\
+        -1, x < 4 \\
+        0, 4 \leq x < 5  
+    \end{cases}
+\end{align*}
+\end{lstlisting}
+\begin{align*}
+    f(x) = \begin{cases}
+        1, x \geq 5 \\
+        -1, x < 4 \\
+        0, 4 \leq x < 5  
+    \end{cases}
+\end{align*}
+You will notice \verb|\leq| and \verb|\geq| for \( \leq \) and \( \geq \), respectively.
+They can be quickly produced with VSCode with the snippets \verb|@<| and \verb|@>|.
+
+The last thing we will cover for maths symbols is calculus.
+A full list of symbols native available can be found \href{https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols}{here}.
+Many of the most commonly used ones have snippets available in our editor, like \verb|@8| \( \implies \) \verb|\infty| (\( \infty\)); \verb|@2| \( \implies \) \verb|\sqrt{}| (\(\sqrt{} \)); \verb|@-| \( \implies \) \verb|\bigcap| (\( \bigcap \)), and much more.
+
+Finally, there are many options to how one can align and number equations, \texttt{amsmath} has excellent documentation explaining the various cases.
+See page 5 \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/required/amsmath/amsldoc.pdf}{here}.
+
 \subsection{Calculus}
+Let's typeset derivatives from first principle and integrals from riemann sums.
+
+Try typesetting these yourself, including the organisation! You can find a solution in the \texttt{Calculus} example folder.
+
+\subsubsection{Derivatives}
+Given an expression \( f(x) = x^2+5 \), the derivative, \( f'(x) \), from first principle is given by:
+\begin{align}
+    f'(x) &= \lim_{\delta x \to 0}
+        \frac{
+            f(x + \delta x) - f(x)
+        }{ \delta x }
+    \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            {(x + \delta x)}^2+5 - (x^2+5)
+        }{ \delta x }
+    \nonumber \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            x^2 + 2x\delta x + {\delta x}^2 +5 - (x^2+5)
+        }{ \delta x }
+    \nonumber \\
+    &= \lim_{\delta x \to 0}
+        \frac{
+            \cancel{\delta x} (2x + \delta x)
+        }{ \cancel{\delta x} }
+    \nonumber \\
+    f'(x) &= 2x 
+\end{align}
+
+The way these have been typeset in this document was to use an \verb|align| environment (a numbered environment) and the \verb|\nonumber| command before each new line I did not want numbered.
+All equations are aligned at the equals sign, which we achieve by setting the alignment anchor \verb|&| before the \verb|=|.
+
+\clearpage
+
+\begin{lstlisting}
+    f'(x) & = ... \\
+    & = ... \\
+\end{lstlisting} 
+
+As expected, \( \delta x\) can be written with \verb|\delta x|. Notice the space between both is important, seeing as \verb|\deltax| is not a command itself.
+
+The limit symbol comes from \verb|\lim_{exp}|. The underscore \verb|_| refers to a subscript, and you will see similar notation for integrals, sums and even besides brackets.
+
+Finally, the \texttt{cancel} package provides us with the \verb|\cancel{exp}| command, which puts a strike through \verb|exp|.
+It also provides \verb|\cancelto{value}{exp}|, which in a math environment generates \( \cancelto{0}{x+5} \).
+
+Once again, try to replicate it for yourself and see a solution in the \texttt{Calculus} example.
+\begin{lstlisting}
+    \cancelto{0}{x+5}
+\end{lstlisting} 
+
+Our options for derivatives are straightforward:
+\begin{align*}
+    \frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x) \quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
+    \nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega} \qquad \nabla \times \vec{F}  
+\end{align*}
+These are achieved with the following code
+\begin{lstlisting}
+    \frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x) \quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
+    \nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega} \qquad \nabla \times \vec{F}  
+\end{lstlisting}
+It's worth mentioning that math environments ignore spaces.
+It automatically chooses an appropriate spacing after \verb|+| or \verb|=|, for instance, but sometimes you need to force a space.
+Small spaces are done with `\verb|\ |' (note the empty space that follows the backslash), alternatively larger spaces are \verb|\quad| and \verb|\qquad|.
+
+\subsubsection{Integrals}
+Let \( f: [a,b] \to \mathbb{R} \) be a function defined in the closed interval \( [a,b] \) and with partitions
+\begin{equation*}
+    P = \left \{ 
+        [x_0,x_1], [x_1,x_2], \dots [x_{n-1},x_n]
+     \right \}
+\end{equation*}
+such that
+\begin{equation*}
+    a = x_0 < x_1 < x_2 \dots x_n = b
+\end{equation*}
+A Riemann sum \( S \) is defined as:
+\begin{equation}
+    S = \sum_{i=1}^{n} f(x_i^*) \Delta x_i
+\end{equation}
+Now if \( f \) is integrable within the interval and \( \Delta x_i \) approaches zero, we have an integral:
+\begin{equation}
+    \int_a^b f(x) \,dx= \lim_{\Delta x_i \to 0}S = \lim_{\Delta x_i \to 0} \sum_{i=1}^{n} f(x_i^*) \Delta x_i 
+\end{equation}
+
+And finally, if \( F(x) \) is the integral of \( f(x) \), then
+\begin{equation*}
+    \int_a^b f(x) \,dx = F(x)\Big|_a^b = \Big[F(x)\Big]_a^b
+\end{equation*}
+
+\paragraph{Note:}
+The \verb|align| environment has a peculiar spacing between text and the math display area, which is larger than \verb|equation|, the environment used for these examples.
+
+The uppercase sigma sum symbol \( \sum \) is done with \verb|\sum|.
+Intuitively, if you need the pi product symbol \( \prod \), that is \verb|\prod|.
+As expected, \verb|_| marks the text to go below and \verb|^| the text that goes above.
+Therefore this is what was used: 
+\begin{lstlisting}
+    \sum_{i=1}^n
+\end{lstlisting} 
+
+Integrals use the \verb|\int| tag, with similar sub/superscripts behaviour to sums.
+To guarantee a small space between the expression and \( dx \), the suggestion is to use \verb|\, dx|.
+The other variants of the integral symbol can be seen below.
+\begin{align*}
+    \int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
+\end{align*}
+\begin{lstlisting}
+    \int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
+\end{lstlisting}
+
+The bar that indicates ``evaluated in the interval \( a \) to \( b \)'' \( \Big|_a^b \) is done by using \verb!\Big|_a^b!.
+Note that both \verb|\big| and \verb|\Big| both exist, and they each give a different value. 
+Similarly, the same syntax can be used for square brackets.
+\begin{lstlisting}
+    F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b
+\end{lstlisting}
