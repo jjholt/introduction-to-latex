@@ -303,8 +303,11 @@ The other variants of the integral symbol can be seen below.
 \end{lstlisting}
 
 The bar that indicates ``evaluated in the interval \( a \) to \( b \)'' \( \Big|_a^b \) is done by using \verb!\Big|_a^b!.
-Note that both \verb|\big| and \verb|\Big| both exist, and they each give a different value. 
-Similarly, the same syntax can be used for square brackets.
+Note that both \verb|\big| and \verb|\Big| exist, each one referring to a slightly different length. 
+A similar syntax can be used for other brackets.
 \begin{lstlisting}
-    F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b
+    F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b = \Big\{ F(x) \Big|}_a^b
 \end{lstlisting}
+\begin{equation*}
+    F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b = \Big \{ F(x) \Big \}_a^b
+\end{equation*}
