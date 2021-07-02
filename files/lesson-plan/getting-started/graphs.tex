@@ -58,11 +58,31 @@ We created legends by using \verb|\addlegendentry{}|, but we also have the optio
 
 We have a lot of freedom with the frequency of the label ticks, whether you want them replaced with text, minimum and maximum displayed values.
 Changing the options of our plot to the following, and adding a dashed-line plot gives us the graph seen below.
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+    \begin{tikzpicture}
+        \begin{axis} [
+            xlabel=\(x\), ylabel=\(f(x)\),
+            legend pos = north west,
+            domain=-5:5, axis lines = center,
+            ytick={-100,0,75}, 
+        ]
+            \addplot[blue, thick] {x^2};
+            \addlegendentry{\(x^2\)}
+            \addplot[red] {x^3+2};
+            \addlegendentry{\(x^3+2\)}
+            \addplot[dashed, domain=0:4.18] {75};
+        \end{axis}
+    \end{tikzpicture}    
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
 \begin{lstlisting}
 \begin{tikzpicture}
     \begin{axis} [
         xlabel=\(x\), ylabel=\(f(x)\),
-        legend pos = outer north east,
+        legend pos = north west,
         domain=-5:5, axis lines = center,
         ytick={-100,0,75}, 
     ]
@@ -74,22 +94,7 @@ Changing the options of our plot to the following, and adding a dashed-line plot
     \end{axis}
 \end{tikzpicture}
 \end{lstlisting}
-
-\begin{figure}[h]\centering
-    \begin{tikzpicture}
-        \begin{axis} [
-            xlabel=\(x\), ylabel=\(f(x)\),
-            legend pos = outer north east,
-            domain=-5:5, axis lines = center,
-            ytick={-100,0,75}, 
-        ]
-            \addplot[blue, thick] {x^2};
-            \addlegendentry{\(x^2\)}
-            \addplot[red] {x^3+2};
-            \addlegendentry{\(x^3+2\)}
-            \addplot[dashed, domain=0:4.18] {75};
-        \end{axis}
-    \end{tikzpicture}
+\end{minipage}
 \end{figure}
 
 \verb|\addplot[dashed, domain=0:4.18] {75};| is particularly interesting because it goes against the general recommendation.
@@ -137,30 +142,27 @@ On the other hand, \verb|\addlegendentry{x^2}| is attempting to display \verb|x^
     \legend{Camembert, Feta}
     \end{axis}
 \end{tikzpicture}
-\caption{A bar plot}
+\caption{A bar plot and the same data without \texttt{ybar}.}
 \end{figure}
 
 \begin{lstlisting}
-    \begin{figure}[h]\centering
-        \begin{tikzpicture}[scale=0.9]
-            \begin{axis}[
-                ybar interval=0.7,
-                ylabel=Consumption (kg),
-                legend style={
-                    at={(0.5,-0.1)}, anchor=north,legend columns=-1
-                },
-            ]
-            \addplot coordinates {
-                (1997,32) (1998,100) (1999,105) (2000,58) 
-            };
-            \addplot coordinates {
-                (1997,35) (1998,120) (1999,80) (2000,39) 
-            };
-            \legend{Camembert, Feta}
-            \end{axis}
-        \end{tikzpicture}
-        \caption{A bar plot}
-        \end{figure}  
+\begin{tikzpicture}[scale=0.9]
+    \begin{axis}[
+        ybar interval=0.7,
+        ylabel=Consumption (kg),
+        legend style={
+            at={(0.5,-0.1)}, anchor=north,legend columns=-1
+        },
+    ]
+        \addplot coordinates {
+        (1997,32) (1998,100) (1999,105) (2000,58) 
+        };
+        \addplot coordinates {
+            (1997,35) (1998,120) (1999,80) (2000,39) 
+        };
+        \legend{Camembert, Feta}
+    \end{axis}
+\end{tikzpicture}
 \end{lstlisting}
 The option \verb|ybar interval = 0.7| creates a bar plot in the y-direction with a bar thickness (in the x-direction) of 0.7.
 On the right of it you can see the exact same plot without the \verb|ybar| option.

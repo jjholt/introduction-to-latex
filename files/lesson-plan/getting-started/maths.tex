@@ -9,14 +9,15 @@ A math environment allows subscripts, superscripts, greek letters and for most t
 In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\).
 
 \verb|{}| is how we indicate that everything inside the brackets should be treated together.
-The difference becomes clear with the following example: \(x^12 + x_0^2 + {x_0}^2\) generated from the code below. %chktex 25
+This should become clear from the following code:
 \begin{lstlisting}
-    \(x^12 + x_0^2 + {x_0}^2\)
+    \( x^12 + x_0^2 + {x_0}^2 \)
 \end{lstlisting}
+and its result: \( x^12 + x_0^2 + {x_0}^2 \)
 
 \paragraph{Display math} can be done in several ways.
-The suggestion is to use the \verb|amsmath| package, and the \verb|align| environment.
-\texttt{align} numbers every single line, and \texttt{align*} does not.
+The suggestion is using the \verb|amsmath| package, and either the \verb|align| or \verb|equation| environments.
+\texttt{align} numbers every single line, and \texttt{align*} does not. Similarly for \verb|equation|.
 
 To declare a new line, use \verb|\\|, and \verb|&| defines the point in the expression (if any) for horizontal alignment.
 \begin{lstlisting}
@@ -58,7 +59,7 @@ Press \verb|tab| and it will even place your cursor in the right spot.
 If you expect to put a lot inside those brackets, press \texttt{enter}, and use vertical space + identations to keep everything tidy.
 
 Finally, the snippet for fractions is \verb|@/|, and to create the unnumbered \texttt{align*} environment, type \texttt{bsal}, then \texttt{tab} --- \textbf{b}egin, \textbf{s} for unnumbered, \textbf{al}ign.
-Similar snippets exist for other environments, such as figure --- \texttt{bfi}; align --- \texttt{bal}.
+Similar snippets exist for other environments, such as figure --- \texttt{bfi}; align --- \texttt{bal}; align* --- \texttt{bsal}, etc.
 A full list can be seen \href{https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets}{here}.
 
 \subsection{Organisation}
@@ -100,10 +101,10 @@ f(x) &
 &= \dots
 \end{lstlisting}
 
-Before we move on to more complicated expressions, it's worth pointing out how to define \LaTeX\ variables.
-The motivation is similar to how you would say ``let \(a = e^x+\sqrt{3}\)'' and use \(a\) in the expressions. It becomes quite hard and tedious to write text over and over.
-
 \subsection{Variables}
+It is also worth pointing out how to define \LaTeX\ variables.
+The motivation is similar to how you would say ``let \(a = e^x+\sqrt{3}\)'' and use \(a\) in the expressions.
+
 \paragraph{Defining a new variable} uses \verb|\newcommand{\command}{expression}|.
 With our example, that means \verb|\newcommand{\a}{e^x+\sqrt{3}}|.
 Now we can produce the same output by typing \verb|\a|.
@@ -137,7 +138,21 @@ The \verb|matrix| environment produces matrices without brackets,
 for parenthesis we would use \texttt{pmatrix}; and for square brackets, \texttt{bmatrix}.
 The syntax is similar to tables/tabular we covered earlier --- \verb|&| separate columns and \verb|\\| separate rows.
 Notice you will need to create a matrix environment inside of a math environment, like below 
-
+\begin{figure}[h] \centering
+\begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        \vec{F} = \begin{bmatrix}
+            1 & 2 & 3 \\
+            3 & 2 & 1 
+        \end{bmatrix}
+        , \qquad
+        A = \begin{pmatrix}
+            1 \\ 2
+    \end{pmatrix}
+    \end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
 \begin{lstlisting}
 \begin{align*}
     \vec{F} = \begin{bmatrix}
@@ -150,35 +165,37 @@ Notice you will need to create a matrix environment inside of a math environment
     \end{pmatrix} 
 \end{align*}
 \end{lstlisting}
+\end{minipage}
 
-\begin{align*}
-    \vec{F} = \begin{bmatrix}
-        1 & 2 & 3 \\
-        3 & 2 & 1 
-    \end{bmatrix}
-    , \qquad
-    A = \begin{pmatrix}
-        1 \\ 2
-\end{pmatrix}
-\end{align*}
+\end{figure}
+
+
 
 Another important environment which has similar syntax is \verb|cases|, which looks like this:
-\begin{lstlisting}
-\begin{align*}
-    f(x) = \begin{cases}
-        1, x \geq 5 \\
-        -1, x < 4 \\
-        0, 4 \leq x < 5  
-    \end{cases}
-\end{align*}
-\end{lstlisting}
-\begin{align*}
-    f(x) = \begin{cases}
-        1, x \geq 5 \\
-        -1, x < 4 \\
-        0, 4 \leq x < 5  
-    \end{cases}
-\end{align*}
+
+\begin{figure}[h]
+	\begin{minipage}{0.45\textwidth}
+    \begin{align*}
+        f(x) = \begin{cases}
+            1, x \geq 5 \\
+            -1, x < 4 \\
+            0, 4 \leq x < 5  
+        \end{cases}
+    \end{align*}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+    \begin{lstlisting}
+    \begin{align*}
+        f(x) = \begin{cases}
+            1, x \geq 5 \\
+            -1, x < 4 \\
+            0, 4 \leq x < 5  
+        \end{cases}
+    \end{align*}
+    \end{lstlisting}
+\end{minipage}
+\end{figure}
+
 You will notice \verb|\leq| and \verb|\geq| for \( \leq \) and \( \geq \), respectively.
 They can be quickly produced with VSCode with the snippets \verb|@<| and \verb|@>|.
 
@@ -220,10 +237,10 @@ Given an expression \( f(x) = x^2+5 \), the derivative, \( f'(x) \), from first 
     f'(x) &= 2x 
 \end{align}
 
+---
+
 The way these have been typeset in this document was to use an \verb|align| environment (a numbered environment) and the \verb|\nonumber| command before each new line I did not want numbered.
 All equations are aligned at the equals sign, which we achieve by setting the alignment anchor \verb|&| before the \verb|=|.
-
-\clearpage
 
 \begin{lstlisting}
     f'(x) & = ... \\
@@ -237,21 +254,34 @@ The limit symbol comes from \verb|\lim_{exp}|. The underscore \verb|_| refers to
 Finally, the \texttt{cancel} package provides us with the \verb|\cancel{exp}| command, which puts a strike through \verb|exp|.
 It also provides \verb|\cancelto{value}{exp}|, which in a math environment generates \( \cancelto{0}{x+5} \).
 
-Once again, try to replicate it for yourself and see a solution in the \texttt{Calculus} example.
 \begin{lstlisting}
-    \cancelto{0}{x+5}
+\cancelto{0}{x+5}
 \end{lstlisting} 
 
+Once again, try to replicate it for yourself and see a solution in the \texttt{Calculus} example.
+
 Our options for derivatives are straightforward:
-\begin{align*}
-    \frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x) \quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
-    \nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega} \qquad \nabla \times \vec{F}  
-\end{align*}
-These are achieved with the following code
+\begin{figure}[h]
+    \begin{minipage}{0.40\textwidth}
+        \begin{align*}
+            \frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x)
+            \quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
+            \nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega}
+            \qquad \nabla \times \vec{F}  
+        \end{align*}
+    \end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
 \begin{lstlisting}
-    \frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x) \quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
-    \nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega} \qquad \nabla \times \vec{F}  
+\frac{d\ f(x)}{dx} \quad \frac{d^2 }{d x^2} f(x)
+\quad \frac{\partial^3 }{\partial^3 x} f(x,y) \\
+\nabla^2 \vec{f} \qquad \nabla \cdot \vec{\omega}
+\qquad \nabla \times \vec{F}  
 \end{lstlisting}
+\end{minipage}
+\centering
+\end{figure}
+
 It's worth mentioning that math environments ignore spaces.
 It automatically chooses an appropriate spacing after \verb|+| or \verb|=|, for instance, but sometimes you need to force a space.
 Small spaces are done with `\verb|\ |' (note the empty space that follows the backslash), alternatively larger spaces are \verb|\quad| and \verb|\qquad|.
@@ -281,6 +311,8 @@ And finally, if \( F(x) \) is the integral of \( f(x) \), then
     \int_a^b f(x) \,dx = F(x)\Big|_a^b = \Big[F(x)\Big]_a^b
 \end{equation*}
 
+---
+
 \paragraph{Note:}
 The \verb|align| environment has a peculiar spacing between text and the math display area, which is larger than \verb|equation|, the environment used for these examples.
 
@@ -295,14 +327,22 @@ Therefore this is what was used:
 Integrals use the \verb|\int| tag, with similar sub/superscripts behaviour to sums.
 To guarantee a small space between the expression and \( dx \), the suggestion is to use \verb|\, dx|.
 The other variants of the integral symbol can be seen below.
-\begin{align*}
-    \int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
-\end{align*}
+\begin{figure}[h]
+\begin{minipage}{0.40\textwidth}
+    \begin{align*}
+        \int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
+    \end{align*}
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
 \begin{lstlisting}
-    \int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
+\int f(x) \,dx \quad \iint \,dA \quad \iiint \oint 
 \end{lstlisting}
+\end{minipage}
+\centering
+\end{figure}
 
-The bar that indicates ``evaluated in the interval \( a \) to \( b \)'' \( \Big|_a^b \) is done by using \verb!\Big|_a^b!.
+The bar that indicates ``evaluated in the interval \( a \) to \( b \)'', \( \Big|_a^b \), is done by using \verb!\Big|_a^b!.
 Note that both \verb|\big| and \verb|\Big| exist, each one referring to a slightly different length. 
 A similar syntax can be used for other brackets.
 \begin{lstlisting}
@@ -310,4 +350,4 @@ A similar syntax can be used for other brackets.
 \end{lstlisting}
 \begin{equation*}
     F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b = \Big \{ F(x) \Big \}_a^b
-\end{equation*}
+\end{equation*} 
