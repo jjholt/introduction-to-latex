@@ -4,10 +4,10 @@ One thing we can do is split up our document into the \emph{preamble}, the file 
 The content can be split up whichever way you see fit --- with the more complicated it is, the more you would want to split it up. 
 
 Let's expand our working directory like seen below. You can also just copy the files from \verb|Example2| .
-\clearpage
 \begin{verbatim}
 Example2
 ├── bibliography.bib
+├── cheese-prices.dat
 ├── main.pdf
 ├── main.tex
 ├── code
@@ -78,7 +78,7 @@ So in order to scale the picture to 0.5 of the textwidth, we would use:
 \includegraphics[width=0.5\textwidth]{figures/gradient-cicle.png}
 \end{lstlisting}
 
-\paragraph{Note: }
+\paragraph{Note:}
 Occasionally weneed to put two pictures side-by-side. How would you achieve that? The simplest way is to include both within the same \verb|figure| environment and make sure their widths are less than half of the allowable text width: \verb|width=0.5\textwidth|.
 If you need captions on each subfigure, then you are looking for the package \verb|subcaption|, and you can find more information \href{http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/caption/subcaption.pdf}{here}.
 
@@ -115,7 +115,54 @@ which looks like this:
 \verb!{r|lc}! means a right-adjusted column with a vertical divider, a left-adjusted column, and a centre-adjusted column.
 
 Each column is separated by \verb|&| and each row is separated by \verb|\\|. \verb|\hline| is used to produce a horizontal line that separates titles from content.
+
+How would you create the following table? You can find a solution in the \texttt{Table} folder in the examples.
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+    Index & Cheese & Price (USD/kg) \\ \hline
+    1 & Feta & 10.50 \\
+    2 & Camembert & 12.20 \\
+    3 & Edam & 8.95 
+\end{tabular}
+    \caption{Cheese prices in local supermarket.}
+\end{table}
+
 \paragraph{Note:} As you may have noticed, some characters have special meaning, like \&, \{, \} and \textbackslash. To display the literal symbol, it needs to be \emph{escaped} by a preceeding \verb|\|, like this: \verb|\&|, \verb|\{|, etc. The backslash is an exception, because \verb|\\| is also a special character, so you have to use \verb|\textbackslash|.
+
+\subsubsection{Table from data}
+From data we can create \texttt{tabular} environments, which can be wrapped in a \texttt{table} environment and given captions and labels.
+
+Generally we need the packages \texttt{pgfplotstable}, \texttt{booktabs}, \texttt{array}, that is
+\begin{lstlisting}
+    \usepackage{pgfplotstable, booktabs, array}
+\end{lstlisting}
+
+The data used here is \texttt{cheese-prices.dat} in the \texttt{Example2} folder.
+\lstinputlisting[caption={\texttt{cheese-price.dat}}]{Examples/Example2/cheese-prices.dat}
+
+Then the data can be imported with \verb|\pgfplotstabletypeset{}|.
+Because we have text in our table, we indicate the \texttt{string type} option, and similarly \verb|"| indicating text. 
+By default, it will just import the data and put it on a table, so we can add the horizontal line after the titles with the code in line 4.
+\begin{lstlisting}
+\begin{table}[h]\centering
+    \pgfplotstabletypeset[
+        text indicator=", string type,
+        every head row/.style={after row=\hline},
+    ]{Examples/Example2/cheese-prices.dat}
+    \caption{Replicated from a table!}
+\end{table}     
+\end{lstlisting}
+
+\begin{table}[h]\centering
+    \pgfplotstabletypeset[
+        text indicator=", string type,
+        every head row/.style={after row=\hline},
+    ]{Examples/Example2/cheese-prices.dat}
+    \caption{Replicated from a table!}
+\end{table}     
+
+There is a lot of customising that can be done, and you can find the documentation for \texttt{pgfplotstable} \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplotstable.pdf}{here}.
 
 \subsection{Lists}
 There are two types of lists: numbered and unnumbered, and these are \verb|enumerate| and \verb|itemize| environments, respectively.
@@ -132,7 +179,6 @@ Resulting in:
 \end{figure}
 
 A new entry is only created with \verb|\item|, so you can have as much code between entries as you want, including other environments and nestings of \verb|enumerate|, like this:
-\clearpage
 \begin{lstlisting}
 \begin{enumerate}
     \item First question
