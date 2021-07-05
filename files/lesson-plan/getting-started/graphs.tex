@@ -5,6 +5,23 @@ The objective here is to read through the code below before seeing the results, 
 The \texttt{pgfplots} package is extremely well documented with hundreds of examples, and very well structured tutorials.
 Take the examples highlighted here as graphs we do often, but it is highly recommended to skim through the documentation \href{https://mirror.ox.ac.uk/sites/ctan.org/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf}{here}.
 
+\begin{figure}[h]\centering
+\begin{minipage}{0.45\textwidth}
+    \begin{tikzpicture}
+        \begin{axis} [
+            xlabel=\(x\) , ylabel=\(f(x)\), title=Example title,
+            domain=0:5, legend pos = north west,
+        ]
+            \addplot[blue, thick] {x^2};
+            \addlegendentry{\(x^2\)}
+            \addplot[red] {x^3+2};
+            \addlegendentry{\(x^3+2\)}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Example caption}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
 \begin{lstlisting}
 \begin{figure}[h]\centering
     \begin{tikzpicture}
@@ -22,26 +39,11 @@ Take the examples highlighted here as graphs we do often, but it is highly recom
     \caption{Example caption}
     \end{figure}  
 \end{lstlisting}
-
-\begin{figure}[h]\centering
-\begin{tikzpicture}
-    \begin{axis} [
-        xlabel=\(x\) , ylabel=\(f(x)\), title=Example title,
-        domain=0:5, legend pos = north west,
-    ]
-        \addplot[blue, thick] {x^2};
-        \addlegendentry{\(x^2\)}
-        \addplot[red] {x^3+2};
-        \addlegendentry{\(x^3+2\)}
-    \end{axis}
-\end{tikzpicture}
-\caption{Example caption}
+\end{minipage}
 \end{figure}
 
 \texttt{axis} is the most common axis environment, but we can also use \texttt{semilog\underline{x}axis}, \texttt{semilog\underline{y}axis} and \texttt{loglogaxis} for our logarithmic axis needs, \texttt{polaraxis}, and more.
-There are hundreds of options, and the best approach is to look through examples choose what you want to replicate.
-The names tend to be self-evident, but we will briefly touch on them with each example.
-
+There are hundreds of options with names that tend to be self-evident, and the best approach is to search for examples and modify them to your needs.
 \begin{lstlisting}
     \begin{axis}[
         %options here separate by commas,
@@ -52,7 +54,7 @@ The names tend to be self-evident, but we will briefly touch on them with each e
 
 Plotting a function is simply a matter of using \verb|\addplot[options] {function};|.
 The options include things like colour, thickness, the domain for that specific plot and much more.
-Generally you will want to have the domain defined in the \texttt{axis} environment, not for each plot.
+Generally you will want to have the domain defined in the \texttt{axis} environment, not for each plot, but you will see plenty of examples where you do both.
 
 We created legends by using \verb|\addlegendentry{}|, but we also have the option of using \verb|\legend{}| and describing them all in one place, as will be seen in the next example.
 
@@ -174,11 +176,88 @@ Notice that in the previous example we simply used \verb|legend pos|, but there 
 
 This time around we created plots from coordinates, which are simply given as a list without commas, as highlighted below
 The main use-case tends to be simple bar plots, because usually we would import data from a file, as in our next example.
+
 \begin{lstlisting}
     \addplot coordinates {
         (x1,y1) (x2,y2) (x3,y3)...
     };
 \end{lstlisting}
+
+\paragraph{Challenge:}
+Can you combine the two to create a graphical representation of a Riemann sum?
+Below is one possible solution based on \href{https://tex.stackexchange.com/questions/197930/riemann-sum-with-pgfplots-cant-seem-to-make-graph-look-right}{this} thread in Stackexchange, an extremely important tool to finding solutions and learning!
+
+\begin{figure}[h]\centering
+\begin{minipage}{0.45\textwidth}
+    \begin{tikzpicture}
+        \begin{axis}[xlabel= \( x \), ylabel= \( f(x) \),
+                xmin=0, ymin=0, 
+                axis lines = left, domain=0:10,
+                legend pos = north west,
+            ]
+            \addplot [draw=blue, fill=blue!10, ybar interval, samples=10, domain=10:1]{x^2}\closedcycle;
+            \addplot [draw=red, fill=red!10, ybar interval, samples=10, domain=1:10] {x^2}\closedcycle;
+            \addplot[smooth, thick,domain=1:10,samples=40]{x^2};
+            \legend{Upper, Lower, \( x^2 \) }
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{lstlisting}
+\begin{tikzpicture}
+    \begin{axis}[xlabel= \(x\), ylabel= \(f(x)\),
+            xmin=0, ymin=0, 
+            axis lines = left, domain=0:10,
+            legend pos = north west,
+        ]
+        \addplot [draw=blue, fill=blue!10, ybar interval, samples=10, domain=10:1]{x^2}\closedcycle;
+        \addplot [draw=red, fill=red!10, ybar interval, samples=10, domain=1:10] {x^2}\closedcycle;
+        \addplot[smooth, thick,domain=1:10,samples=40]{x^2};
+        \legend{Upper, Lower, \( x^2 \) }
+    \end{axis}
+\end{tikzpicture}
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+One important thing to note: the \texttt{draw} option controls the colour of the stroke/outline, while \texttt{fill} colours from the curve to the axis.
+Now if you want to colour the area between two curves, you may want to look at section 5.7 of the documentation or work through an example, like \href{https://www.sqlpac.com/en/documents/latex-pgfplots-tikz-filling-areas-under-and-between-curves.html}{this} one.
+
+By increasing the number of \texttt{samples} (subdivisions), we can even see that it approaches the integral.
+\begin{figure}[h]\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[xlabel= \( x \), ylabel= \( f(x) \),
+                    xmin=0, ymin=0, 
+                    axis lines = left, domain=0:10,
+                    legend pos = north west,
+                ]
+                \addplot [draw=blue, fill=blue!10, ybar interval, samples=90, domain=10:1]{x^2}\closedcycle;
+                \addplot [draw=red, fill=red!10, ybar interval, samples=90, domain=1:10] {x^2}\closedcycle;
+                \addplot[smooth, thick,domain=1:10,samples=40]{x^2};
+                \legend{Upper, Lower, \( x^2 \) }
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{lstlisting}
+\begin{tikzpicture}
+    \begin{axis}[xlabel= \(x\), ylabel= \(f(x)\),
+            xmin=0, ymin=0, 
+            axis lines = left, domain=0:10,
+            legend pos = north west,
+        ]
+        \addplot [draw=blue, fill=blue!10, ybar interval, samples=90, domain=10:1]{x^2}\closedcycle;
+        \addplot [draw=red, fill=red!10, ybar interval, samples=90, domain=1:10] {x^2}\closedcycle;
+        \addplot[smooth, thick,domain=1:10,samples=40]{x^2};
+        \legend{Upper, Lower, \( x^2 \) }
+    \end{axis}
+\end{tikzpicture}
+        \end{lstlisting}
+    \end{minipage}
+\end{figure}
 
 \subsection{Plot from data}
 Data files are usually either \texttt{.csv} (with columns separated by commas), \texttt{.dat} or \texttt{.txt} (columns separated by tabs).
@@ -186,6 +265,10 @@ Generally if copying directly from LibreOffice/Excel, columns will be tab separa
 
 Three columns of random data were generated using LibreOffice and can be found in the examples folder called \texttt{data.dat}. They can also be seen below.
 \lstinputlisting[caption={data.dat}]{Examples/data.dat}
+
+\paragraph{Challenge:}
+Can you import this data in to a table using \texttt{pgfplotstable}?
+\textbf{Hint:} you may want to use these options: \verb|precision = 3| and \verb|fixed zerofill|.
 
 \begin{figure}[h]\centering
 \begin{minipage}{0.45\textwidth}
@@ -234,6 +317,9 @@ It's worth noting that \texttt{pgfplots} tries to graph with the least amount of
 \end{minipage}
 \end{figure}
 
+\paragraph{Note:}
+It is possible to get \texttt{pgfplots} to generate a linear regression from your data, but realistically we process the data elsewhere, and use this only for display.
+If you would like to do it anyway, look at section 3.3 of the \texttt{pgfplots}' documentation \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplots.pdf}{here}.
 
 \subsection{3d plots}
 It is possible to do 3d plots with \texttt{pgfplots}, but beyond anything simple, you will find that using matlab and exporting the graph is far more computationally efficient.

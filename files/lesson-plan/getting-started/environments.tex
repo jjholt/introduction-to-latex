@@ -135,34 +135,35 @@ From data we can create \texttt{tabular} environments, which can be wrapped in a
 
 Generally we need the packages \texttt{pgfplotstable}, \texttt{booktabs}, \texttt{array}, that is
 \begin{lstlisting}
-    \usepackage{pgfplotstable, booktabs, array}
+\usepackage{pgfplotstable, booktabs, array}
 \end{lstlisting}
 
 The data used here is \texttt{cheese-prices.dat} in the \texttt{Example2} folder.
 \lstinputlisting[caption={\texttt{cheese-price.dat}}]{Examples/Example2/cheese-prices.dat}
 
 Then the data can be imported with \verb|\pgfplotstabletypeset{}|.
-Because we have text in our table, we indicate the \texttt{string type} option, and similarly \verb|"| indicating text. 
-By default, it will just import the data and put it on a table, so we can add the horizontal line after the titles with the code in line 4.
+By default, it expects only numbers --- because we have text in our table, we indicate the \texttt{string type} option, and similarly \verb|text indicator="| so text with spaces is kept together, \verb|"Price (USD/kg)"|. 
+Finally, the horizontal line after the head rows is created with the code in line 4.
 \begin{lstlisting}
 \begin{table}[h]\centering
     \pgfplotstabletypeset[
         text indicator=", string type,
         every head row/.style={after row=\hline},
-    ]{Examples/Example2/cheese-prices.dat}
+    ]{Example2/cheese-prices.dat}
     \caption{Replicated from a table!}
 \end{table}     
 \end{lstlisting}
 
 \begin{table}[h]\centering
     \pgfplotstabletypeset[
-        text indicator=", string type,
-        every head row/.style={after row=\hline},
+        text indicator=", string type, %chktex 18
+        every head row/.style={after row=\hline}, %chktex 44
     ]{Examples/Example2/cheese-prices.dat}
     \caption{Replicated from a table!}
 \end{table}     
 
-There is a lot of customising that can be done, and you can find the documentation for \texttt{pgfplotstable} \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplotstable.pdf}{here}.
+Generally tables are best kept simple, but there is a lot of customising that can be done.
+The documentation for \texttt{pgfplotstable} can be found \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplotstable.pdf}{here}.
 
 \subsection{Lists}
 There are two types of lists: numbered and unnumbered, and these are \verb|enumerate| and \verb|itemize| environments, respectively.

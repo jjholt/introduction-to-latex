@@ -11,9 +11,9 @@ In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\).
 \verb|{}| is how we indicate that everything inside the brackets should be treated together.
 This should become clear from the following code:
 \begin{lstlisting}
-    \( x^12 + x_0^2 + {x_0}^2 \)
+    \( x^12 + x^{12} + x_0^2 + {x_0}^2 \)
 \end{lstlisting}
-and its result: \( x^12 + x_0^2 + {x_0}^2 \)
+and its result: \( x^12 + x^{12} + x_0^2 + {x_0}^2 \)
 
 \paragraph{Display math} can be done in several ways.
 The suggestion is using the \verb|amsmath| package, and either the \verb|align| or \verb|equation| environments.
@@ -31,11 +31,11 @@ To declare a new line, use \verb|\\|, and \verb|&| defines the point in the expr
 \end{document}
 \end{lstlisting}
 \begin{align*}
-    f(x) &= (x+1)(x-1) \cdot \left( \frac{\alpha}{5} \right)\\
-    &= (x^2 - 1)  (\frac{\alpha}{5} )
+    f(x) &= (x+1)(x-1) \cdot \left( \frac{\alpha}{5} \right) + \log_{2} 7\\
+    &= (x^2 - 1)  (\frac{\alpha}{5} ) + \log_{2} 7
 \end{align*}
 
-The usual product symbol is \verb|\cdot|. \(\times\) is produced with \verb|\times|.
+The usual product symbol \( \cdot \) is created with \verb|\cdot|. \(\times\), relevant for both cross product and scientific notation, is produced with \verb|\times|.
 
 The pair \verb|\left( \right)| produce parenthesis that fit any vertical size.
 You will see the effect of them missing in the second expression.
@@ -43,13 +43,13 @@ Similarly, they can be used with \verb|\left\{  \right\}| to fix the size of \ve
 
 Because math environments change the way letters are displayed, \verb|\ln|, \verb|\sin|, \verb|\cos|, \verb|\log|, \verb|\exp| and more can be used to produce the font as we would expect. 
 
-\verb|\frac{numerator}{denominator}| produces the fractions.
+\verb|\frac{numerator}{denominator}| produces the proper fractions \( \frac{a}{b} \). Occasionally you may find \( a/b \) more suitable.
 
 \subsection{Making it easier}
 A few things become very clear: There is a whole lot of syntax to remember; it is very easy to forget something and your \texttt{pdf} won't compile; and big expressions become very complicated to keep track.
 Let's highlight how we avoid these problems.
 
-Inserting greek letters is done by typing \verb|@| followed by the first letter of the english name.
+Inserting greek letters in VSCode can be done by typing \verb|@| followed by the first letter of the english name.
 Some special letters have a ``variable'' variant, like \(\varphi\) (variable phi) compared to \(\phi\) (phi).
 So \(\gamma\) is produced with \verb|@g|, \verb|@f|~=~\(\phi\) and \verb|@vf|~=~\(\varphi\). 
 
@@ -58,28 +58,27 @@ Type whichever one you want and Intellisense should popup.
 Press \verb|tab| and it will even place your cursor in the right spot.
 If you expect to put a lot inside those brackets, press \texttt{enter}, and use vertical space + identations to keep everything tidy.
 
-Finally, the snippet for fractions is \verb|@/|, and to create the unnumbered \texttt{align*} environment, type \texttt{bsal}, then \texttt{tab} --- \textbf{b}egin, \textbf{s} for unnumbered, \textbf{al}ign.
-Similar snippets exist for other environments, such as figure --- \texttt{bfi}; align --- \texttt{bal}; align* --- \texttt{bsal}, etc.
+The snippet for fractions is \verb|@/|.
+
+Finally, to create the unnumbered \texttt{align*} environment, type \texttt{bsal}, then \texttt{tab} --- \textbf{b}egin, \textbf{s} for unnumbered, \textbf{al}ign.
+Similar snippets exist for other environments, such as align --- \texttt{bal}; \texttt{equation} --- \texttt{beq}, \texttt{equation*} --- \texttt{bseq}.
 A full list can be seen \href{https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets}{here}.
 
 \subsection{Organisation}
 Let's look at a simple example 
 \begin{align*}
-    f(x) &
-        = {
-            \left( 
-                \frac{3+x}{x^{2x}}
-                + \left[ 
-                    \sqrt{x} + \sin(2x)
-                \right]
-            \right)
-        }^2
+    f(x) & = {
+        \left( 
+            \frac{3+x}{x^{2x}}
+            + \left[ \sqrt{x} + \sin(2x) \right]
+        \right)
+    }^2
     \\
     &= \dots
 \end{align*}
 
-The following code describes two ``extremes'' of how split-up the code can be.
-Neither is ideal, but as we work through the next examples, it should become clear what a reasonable middleground looks like.
+The following code snippets describe two approaches to splitting up the expression.
+You have a lot of freedom to choose what works best for you, though the suggestion is to use something akin to the second example.
 \begin{lstlisting}
 f(x) &
     = { \left( \frac{3+x}{x^{2x}} + \left[ \sqrt{x} + \sin(2x) \right \right) }^2
@@ -88,15 +87,12 @@ f(x) &
 \end{lstlisting}
 Compared to:
 \begin{lstlisting}
-f(x) &
-    = {
-        \left( 
-            \frac{3+x}{x^{2x}}
-            + \left[ 
-                \sqrt{x} + \sin(2x)
-            \right]
-        \right)
-    }^2
+f(x) & = {
+    \left( 
+        \frac{3+x}{x^{2x}}
+        + \left[ \sqrt{x} + \sin(2x) \right]
+    \right)
+}^2
 \\
 &= \dots
 \end{lstlisting}
@@ -131,11 +127,11 @@ Would produce the following result, and we can refer to it by number by using \v
 \end{align}
 \subsection{Vectors, matrices and cases}
 Vector notation is achieved using \verb|\vec{F}|, producing \(\vec{F}\).
-If you prefer bold instead of the arrow, redefine the \verb|\vec| variable in the preamble to math bold, like so:
-\verb|\renewcommand{\vec}{\mathbf}| \(\implies \mathbf{F}\).
+If you prefer bold instead of the arrow \( \vec{F} \implies \mathbf{F}\), redefine the \verb|\vec| variable in the preamble to math bold, like so:
+\verb|\renewcommand{\vec}{\mathbf}|.
 
-The \verb|matrix| environment produces matrices without brackets,
-for parenthesis we would use \texttt{pmatrix}; and for square brackets, \texttt{bmatrix}.
+The \verb|matrix| environment produces matrices without brackets, essentially the same as the \texttt{tabular} environment.
+For parenthesis we would use \texttt{pmatrix}; and for square brackets, \texttt{bmatrix}.
 The syntax is similar to tables/tabular we covered earlier --- \verb|&| separate columns and \verb|\\| separate rows.
 Notice you will need to create a matrix environment inside of a math environment, like below 
 \begin{figure}[h] \centering
