@@ -329,7 +329,7 @@ Parametised plots are the simplest to get started, but pay attention to the use 
 Note that these examples are taken from \texttt{pgfplots}' documentation.
 \begin{figure}[h]
 \begin{minipage}{0.45\textwidth}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.8]
         \begin{axis}[view={60}{30}]
             \addplot3 [domain=0:5*pi,samples=100,samples y=1,]
             (
@@ -352,9 +352,10 @@ Note that these examples are taken from \texttt{pgfplots}' documentation.
 \end{lstlisting}
 \end{minipage}
 \end{figure}
+
 \begin{figure}[h]
 \begin{minipage}{0.45\textwidth}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.8]
         \begin{axis}[hide axis,xlabel=$x$,ylabel=$y$,mesh/interior colormap name=hot,colormap/blackwhite,]
             \addplot3 [  domain=-1.5:1.5,surf]{-exp(-x^2-y^2)};
         \end{axis}

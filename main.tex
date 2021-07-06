@@ -7,15 +7,16 @@
 
 \titleformat{\chapter}[block]{\huge\bfseries}{}{0.1ex}{}[]
 
-% \newcommand{\sectionbreak}{\clearpage}
+\newcommand{\sectionbreak}{\clearpage}
 \usepackage[titletoc]{appendix}
 \usepackage{tcolorbox}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable, booktabs, array}
-\pgfplotsset{compat=1.16}
+% \pgfplotsset{compat=1.16}
 \usepackage{amssymb, amsmath}
 \usepackage{algorithm2e}
 \usepackage{tikz}
+\usetikzlibrary{positioning,shapes,arrows}
 \usepackage{import}
 
 \usepackage[nottoc]{tocbibind}
@@ -36,6 +37,10 @@
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}
 }
+
+%Control blocks
+\tikzstyle{block} = [draw, minimum width = 2cm, minimum height = 1.2cm, fill=blue!5]
+\tikzstyle{sum} = [draw, fill=blue!5, circle, node distance=1cm]
 
 % Not required packages. Read description!
 \usepackage{circuitikz} %Electric circuits
