@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{amsmath}
+\pgfplotsset{plot coordinates/math parser=false}
+\begin{document}
+\begin{figure}[h] \centering
+    \newlength\fheight{} \newlength\fwidth{}
+    \setlength\fheight{8cm}
+    \setlength\fwidth{12cm}
+    \input{figures/graph.tex}
+\end{figure}
+\end{document}

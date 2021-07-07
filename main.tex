@@ -1,62 +1,66 @@
 \documentclass[oneside]{report}
 \usepackage{geometry}
-\geometry{top=1.0in, bottom=1.0in, left=1.0in, right=1.0in}
+	\geometry{top=1.0in, bottom=1.0in, left=1.0in, right=1.0in}
 \usepackage{setspace}
-\doublespacing
+	\doublespacing
 \usepackage{titlesec}
+	\titleformat{\chapter}[block]{\huge\bfseries}{}{0.1ex}{}[]
+	\newcommand{\sectionbreak}{\clearpage}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 
-\titleformat{\chapter}[block]{\huge\bfseries}{}{0.1ex}{}[]
-
-\newcommand{\sectionbreak}{\clearpage}
-\usepackage[titletoc]{appendix}
-\usepackage{tcolorbox}
+%Maths
 \usepackage{pgfplots}
 \usepackage{pgfplotstable, booktabs, array}
-% \pgfplotsset{compat=1.16}
+	\pgfplotsset{compat=newest}
+	\usepgfplotslibrary{patchplots}
+	\pgfplotsset{plot coordinates/math parser=false}
 \usepackage{amssymb, amsmath}
-\usepackage{algorithm2e}
+\usepackage{cancel}
 \usepackage{tikz}
-\usetikzlibrary{positioning,shapes,arrows}
-\usepackage{import}
+	\usetikzlibrary{plotmarks}
+	\usetikzlibrary{arrows.meta}
+	\usetikzlibrary{positioning,shapes,arrows}
+	%Control blocks
+	\tikzstyle{block} = [draw, minimum width = 2cm, minimum height = 1.2cm, fill=blue!5]
+	\tikzstyle{sum} = [draw, fill=blue!5, circle, node distance=1cm]
+\usepackage{siunitx} %SI units formatting
 
+%Electric circuits
+\usepackage{circuitikz}
+
+%Organisation
+\usepackage{import}
 \usepackage[nottoc]{tocbibind}
 \usepackage[authoryear, round, comma]{natbib} %Bibliography style
 \bibliographystyle{unsrtnat} %Bibliography style
-
-\usepackage{listings}
-\lstset{
-	numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
-	basicstyle = \scriptsize\ttfamily, %smaller size, monospaced
-}
-
 \usepackage{pdfpages}
 \usepackage{transparent}
 \usepackage{xcolor}
-\usepackage{enumerate} 
+
+%Importing inkscape images with \incfig
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}
 }
 
-%Control blocks
-\tikzstyle{block} = [draw, minimum width = 2cm, minimum height = 1.2cm, fill=blue!5]
-\tikzstyle{sum} = [draw, fill=blue!5, circle, node distance=1cm]
+%Code
+\usepackage{listings}
+	\lstset{
+		numbers=left, frame=single, breaklines=true, %Keep text inside a frame, and number each line.
+		basicstyle = \scriptsize\ttfamily, %smaller size, monospaced
+	}
 
-% Not required packages. Read description!
-\usepackage{circuitikz} %Electric circuits
-\usepackage{siunitx} %SI units formatting
-\usepackage{blindtext}
+% Miscellanious
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+	\hypersetup{
+		colorlinks=true,
+		linkcolor=blue,
+		filecolor=magenta,      
+		urlcolor=cyan,
+	}
 \usepackage{pmboxdraw}
-\usepackage{cancel}
+
 \begin{document}
 	\tableofcontents
 	% \part{Learning outcomes}
