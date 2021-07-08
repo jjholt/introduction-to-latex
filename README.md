@@ -21,10 +21,10 @@ A simple introduction to LaTeX for UCL's engineering faculty
 5. Importing code for display
 6. Options: scaling images, styles, etc
 7. Awareness of standard variables `\textwidth`, `\hline`, `\pagebreak`
-8. Emphasis, italics, bold and monospace: `\emph{}`, `textit{}`, `textbf{}`, `texttt{}`, `verb||`
+8. Emphasis, italics, bold and monospace: `\emph{}`, `textit{}`, `textbf{}`, `texttt{}` and `verb||`
 
 ## Mathematics
-1. Inline and display math: `$$`, `align(*)`, `cases`, `bmatrix`
+1. Inline and display math: `$$` or `\( \)`, `align(*)`, `cases`, `bmatrix`
 2. Vector notation (`\vec{}`) and greek letters: `\alpha`, `\beta`, `\varfi`,...
 
 ## Native Graphing
@@ -41,6 +41,5 @@ A simple introduction to LaTeX for UCL's engineering faculty
 
 ## Importing Graphs
 1. Importing graphs as images
-2. Native render from Octave
-3. Native render from Matlab using `Matlab2Tikz`
-4. Native render from Matlab using `plot2svg` using Inkscape
+2. Native render from Matlab using `Matlab2Tikz`
+3. Native render from Matlab using `plot2svg` using Inkscape
