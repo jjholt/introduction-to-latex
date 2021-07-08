@@ -25,6 +25,13 @@
 	\tikzstyle{block} = [draw, minimum width = 2cm, minimum height = 1.2cm, fill=blue!5]
 	\tikzstyle{sum} = [draw, fill=blue!5, circle, node distance=1cm]
 \usepackage{siunitx} %SI units formatting
+%Import and scale matlab2tikz images
+\newcommand{\texdim}[2]{%
+	\newlength\fheight
+	\newlength\fwidth
+    \setlength\fheight{#1}
+    \setlength\fwidth{#2}
+}
 
 %Electric circuits
 \usepackage{circuitikz}
@@ -38,7 +45,7 @@
 \usepackage{transparent}
 \usepackage{xcolor}
 
-%Importing inkscape images with \incfig
+%Importing inkscape images with \incfig. Requires import, pdfpages, transparent, xcolor.
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}

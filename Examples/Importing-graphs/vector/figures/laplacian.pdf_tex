@@ -1,0 +1,82 @@
+%% Creator: Inkscape 1.1 (c4e8f9e, 2021-05-24), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'laplacian.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{525bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.75)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{laplacian.pdf}}%
+    \put(0.08524857,0.40612571){\color[rgb]{0.14901961,0.14901961,0.14901961}\rotatebox{90}{\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}z\end{tabular}}}}}%
+    \put(0.31743429,0.06897857){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}y\end{tabular}}}}%
+    \put(0.64104286,0.05997857){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}x\end{tabular}}}}%
+    \put(0.5175,0.70013286){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\textbf{Laplacian of \(z=\tan(xy)\)}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{laplacian.pdf}}%
+    \put(0.48330857,0.05790714){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}-1\end{tabular}}}}%
+    \put(0.59293714,0.08758857){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}-0.5\end{tabular}}}}%
+    \put(0.70256714,0.11727){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0\end{tabular}}}}%
+    \put(0.81219571,0.14695){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0.5\end{tabular}}}}%
+    \put(0.92182429,0.17663143){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{laplacian.pdf}}%
+    \put(0.44455857,0.05970714){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}-1\end{tabular}}}}%
+    \put(0.36043714,0.09838857){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}-0.5\end{tabular}}}}%
+    \put(0.27631714,0.13707){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0\end{tabular}}}}%
+    \put(0.19219571,0.17575143){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}0.5\end{tabular}}}}%
+    \put(0.10807429,0.21443286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{laplacian.pdf}}%
+    \put(0.11317571,0.23853429){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}-3\end{tabular}}}}%
+    \put(0.11317571,0.29483286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}-2\end{tabular}}}}%
+    \put(0.11317571,0.35113286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}-1\end{tabular}}}}%
+    \put(0.11317571,0.40743286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}0\end{tabular}}}}%
+    \put(0.11317571,0.46373286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}1\end{tabular}}}}%
+    \put(0.11317571,0.52003286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}2\end{tabular}}}}%
+    \put(0.11317571,0.57633286){\color[rgb]{0.14901961,0.14901961,0.14901961}\makebox(0,0)[rt]{\lineheight{1.25}\smash{\begin{tabular}[t]{r}3\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

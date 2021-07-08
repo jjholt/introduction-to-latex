@@ -1,0 +1,39 @@
+\documentclass{article}
+
+%Import pdf_tex. %Credit to Gilles Castel: https://github.com/gillescastel/inkscape-figures
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{xcolor}
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+%Import tex.
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{patchplots}
+\usepackage{amsmath}
+\pgfplotsset{plot coordinates/math parser=false}
+\newcommand{\texdim}[2]{%
+	\newlength\fheight
+	\newlength\fwidth
+    \setlength\fheight{#1}
+    \setlength\fwidth{#2}
+}
+
+\begin{document}
+    \begin{figure}[h]\centering
+        \incfig{laplacian}
+        \caption{From plot2svg}
+    \end{figure}
+    
+    \begin{figure}[h]
+        \texdim{8cm}{12cm}
+        \input{figures/laplacian.tex}
+        \caption{from matlab2tikz}
+    \end{figure}
+\end{document}
