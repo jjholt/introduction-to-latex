@@ -1,0 +1,143 @@
+We draw circuits using the \texttt{circuitikz} package.
+All of the knowledge from \texttt{Tikz} will come in handy, with the benefit that electrical components have already been created and given names.
+The \href{https://mirror.ox.ac.uk/sites/ctan.org/graphics/pgf/contrib/circuitikz/doc/circuitikzmanual.pdf}{documentation} has a component list, and you can find the name for the exact component you need.
+
+Let's create our first circuit:
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.39\textwidth}\centering
+    \begin{circuitikz}
+        \draw (0,0) to[sV] (0,3) -- (3,3) to[R] (3,0) -- (0,0);
+    \end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
+\begin{lstlisting}
+\usepackage{circutikz}
+\begin{document}
+    \begin{circuitikz}
+        \draw (0,0) to[sV] (0,3) -- (3,3) to[R] (3,0) -- (0,0);
+    \end{circuitikz}
+\end{document}
+\end{lstlisting}    
+\end{minipage}
+\end{figure}
+
+To add values with units, the suggestion is to use the package \texttt{siunitx}.
+In fact, this is recommended across any document.
+Basic usage is \verb|\SI{value}{unit}|, and we have the option to either describe the units in text or simply using a symbol: \verb|\ohm| or \verb|ml|.
+
+You have a couple of options with how to produce the label, both shown below.
+Furthermore, \verb|a=| puts it on one side, and \verb|l=| puts it on the other.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.39\textwidth}\centering
+        \begin{circuitikz}
+            \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
+        \end{circuitikz}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.59\textwidth}
+    \begin{lstlisting}
+\usepackage{circutikz}
+\usepackage{siunitx}
+\begin{document}
+    \begin{circuitikz}
+        \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R=\SI{100}{\ohm}] (3,0) -- (0,0);
+    \end{circuitikz}
+\end{document}
+    \end{lstlisting}    
+    \end{minipage}
+\end{figure}
+
+Next let's add an amplifier.
+Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,0)| means a line from (1,1) to (3,1)
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.54\textwidth}
+        \begin{circuitikz}
+            \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
+            \draw (3,3) to[short,*-] ++ (1,0) node [op amp, noinv input up, anchor=+](opamp){};
+            \draw (opamp.-) -- ++(0,-1) coordinate (intersection) to [R] ++ (0,-1.5) node[ground]{};
+            \draw (intersection) to[R] (opamp.out |- intersection) to[short,-*] (opamp.out) to[short,-o] ++(0.3,0) node[above] { \( v_{out} \) };
+        \end{circuitikz}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+    \begin{lstlisting}
+\begin{circuitikz}
+\draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
+\draw (3,3) to[short,*-] ++ (1,0) node [op amp, noinv input up, anchor=+](opamp){};
+\draw (opamp.-) -- ++(0,-1) coordinate (intersection) to [R] ++ (0,-1.5) node[ground]{};
+\draw (intersection) to[R] (opamp.out |- intersection) to[short,-*] (opamp.out) to[short,-o] ++(0.3,0) node[above]{ \(v_{out}\) };
+\end{circuitikz}
+    \end{lstlisting}    
+    \end{minipage}
+\end{figure}
+
+In the same way that you can create nodes at any point to include text or an image (in this case, the amplifier), you can also give the coordinates a name.
+Bear in you mind you can also create the amplifier with \verb|\node|, as per the example below.
+
+It may have been clear from previous examples, but you don't need to create separate \verb|\draw|.
+The motivation to do so is tidiness and legibility.
+
+\begin{figure}[h]
+    \begin{minipage}{0.45\textwidth}
+        \begin{circuitikz}
+            \node [op amp] (opamp) at (0,0) {};
+            \draw
+                (opamp.out) |- ++ (-1,1.5) to[R] ++ (-2,0) |- (opamp.-) to [R] ++ (-3,0) node[ground]{}
+                (opamp.+) to [short,-o] ++ (-1,0) node[left]{$V_{in}$}
+            ;
+            \draw (opamp.out) to[short,-o] ++(0.5,0) node[right]{$V_{out}$};
+        \end{circuitikz}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+\begin{lstlisting}
+\begin{circuitikz}
+\node [op amp] (opamp) at (0,0) {};
+\draw
+    (opamp.out) |- ++ (-1,1.5) to[R] ++ (-2,0) |- (opamp.-) to [R] ++ (-3,0) node[ground]{}
+    (opamp.+) to [short,-o] ++ (-1,0) node[left]{$V_{in}$}
+;
+\draw (opamp.out) to[short,-o] ++(0.5,0) node[right]{$V_{out}$};
+\end{circuitikz} 
+\end{lstlisting}
+    \end{minipage}
+\end{figure}
+
+Below you can see an example with only absolute coordinates.
+
+\begin{figure}[h] \centering
+    \begin{minipage}{0.44\textwidth}
+    \begin{circuitikz}[scale=0.8]
+        \draw (0,0.5) to[short, o-*] (0.65,0.5) |- (1.3,1) to[R=R] (3.3,1) to[R=R] (6.3,1) -- (6.3,0.5) to[short, *-o] (7,0.5);
+        \draw (0.65,0.5) -- (0.65,0) to[C,a=C] (3.3,0) to[C,a=C] (6.3,0) -- (6.3,0.5);
+        \draw (0,-3.5) to[short,o-o] (7,-3.5); %ground
+        \draw (2.7,0) to[resistor, a=$\frac{R}{2}$, *-*] (2.7,-3.5);
+        \draw (3.8,-3.5) node[circ]{} to[C, a=2C] (3.8,-0.2) -- ++ (0,0) arc (-90:90:0.2) -- (3.8,1) node[circ]{};
+        \draw [|->] (0,-3.35) -- (0,0.35) node[midway,fill=white]{$V_{in}$};
+        \draw [|->] (7,-3.35) -- (7,0.35) node[midway,fill=white]{$V_{out}$};
+    \end{circuitikz}
+\end{minipage}
+\hfill
+\begin{minipage}{0.55\textwidth}
+\begin{lstlisting}
+\begin{circuitikz}
+    \draw (0,0.5) to[short, o-*] (0.65,0.5) |- (1.3,1) to[R=R] (3.3,1) to[R=R] (6.3,1) -- (6.3,0.5) to[short, *-o] (7,0.5);
+    \draw (0.65,0.5) -- (0.65,0) to[C,a=C] (3.3,0) to[C,a=C] (6.3,0) -- (6.3,0.5);
+    \draw (0,-3.5) to[short,o-o] (7,-3.5); %ground
+    \draw (2.7,0) to[resistor, a=$\frac{R}{2}$, *-*] (2.7,-3.5);
+    \draw (3.8,-3.5) node[circ]{} to[C, a=2C] (3.8,-0.2) -- ++ (0,0) arc (-90:90:0.2) -- (3.8,1) node[circ]{};
+    \draw [|->] (0,-3.35) -- (0,0.35) node[midway,fill=white]{$V_{in}$};
+    \draw [|->] (7,-3.35) -- (7,0.35) node[midway,fill=white]{$V_{out}$};
+\end{circuitikz}
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+It's quite easy to get lost with complicated circuits, so the suggestion is to think about it in terms of a continuous line drawing.
+You will notice this circuit drawns the horizontal lines across the the resistors, then across the capacitors, then the vertical lines. 
