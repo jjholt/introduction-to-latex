@@ -1,0 +1,13 @@
+\documentclass[oneside]{article}
+\input{settings.tex}
+
+\begin{document}
+	\begin{enumerate}
+		\item \subimport{files/}{1}
+		\item \subimport{files/}{2}
+	\end{enumerate}
+	\begin{appendices}
+		\section{Matlab code}
+		\subimport{files/}{appendix.tex}
+	\end{appendices}
+\end{document}
