@@ -1,3 +1,4 @@
+% \section{Introduction}
 There are two ways to create a maths environment: math mode and display mode.
 \LaTeX\ is usually in text mode, but anything between \verb|$|\dots\verb|$| or \verb|\(|\dots \verb|)\| becomes math mode\footnotemark.
 \footnotetext{The recommended use is \texttt{\textbackslash(}\dots \texttt{\textbackslash)}, but it's not handled very well in VSCode. When snippets are covered, you will see a solution, but feel free to use either.} %chktex 9
@@ -347,3 +348,62 @@ A similar syntax can be used for other brackets.
 \begin{equation*}
     F(x) \Big|_a^b = \Big[ F(x) \Big]_a^b = \Big \{ F(x) \Big \}_a^b
 \end{equation*} 
+
+\subsection{Theorems, lemmas, corollaries, etc}
+While generally not used in an engineering context, you may find the creation of theorems, etc useful:\\
+
+\begin{figure}[h]
+    \newtheorem{theorem}{Theorem}
+    \newtheorem{corollary}{Corollary}[theorem]
+    There is a very famous theorem,
+    \begin{theorem}
+        Angles of a triangle add up to \ang{180}.
+    \end{theorem}
+    which can be followed by a corollary
+    \begin{corollary}
+        The first corollary that follows
+    \end{corollary}
+    More explanations followed by
+    \begin{corollary}
+        The second corollary
+    \end{corollary}
+    \begin{theorem}
+        A second theorem
+    \end{theorem}
+\end{figure}
+
+
+To create each environment, the syntax is
+\begin{lstlisting}
+    \newtheorem{environment-name}{display}[numbered-after]
+\end{lstlisting}
+\texttt{environment-name} is a label.
+\texttt{display} refers to the actual text that will be shown --- Theorem and Corollary, with the capitalisations.
+\texttt{numbered-after} is from where it should derive the numbering --- \texttt{section}, another theorem, etc.
+
+Then we use the environment like any other:
+\begin{lstlisting}
+\begin{environment-name} ... \end{environment-name}
+\end{lstlisting}
+This can be placed at any point in your document, though most likely in your preamble.
+
+To create the example above, we did the following:
+\begin{lstlisting}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+There is a very famous theorem,
+\begin{theorem}
+    Angles of a triangle add up to \ang{180}.
+\end{theorem}
+which can be followed by a corollary
+\begin{corollary}
+    The first corollary that follows
+\end{corollary}
+More explanations followed by
+\begin{corollary}
+    The second corollary
+\end{corollary}
+\begin{theorem}
+    A second theorem
+\end{theorem}
+\end{lstlisting}
