@@ -1,2 +1,72 @@
 \subsection{SI Units}
+The package \href{https://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/siunitx/siunitx.pdf}{\texttt{siunitx}} was briefly mentioned when we discussed circuits.
+Generally this is the go-to package for proper typesetting of units both in text and math modes.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+    \si{\micro\gram\per\second} and \SI{1.25}{\kilo\joule}
+
+    Some are made easier: \SIrange{5}{10}{\kg}, \si{\ug}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{lstlisting}
+\si{\micro\gram\per\second} and \SI{1.25}{\kilo\joule}
+
+Some are made easier: \SIrange{5}{10}{\kg}, \si{\ug}
+\end{lstlisting}
+\end{minipage}
+
+\end{figure}
 \subsection{Chemistry}
+\subsubsection{Formulae}
+The package \href{https://texdoc.org/serve/mhchem/0}{\texttt{mhchem}} is the go-to for chemical formulae with very simple syntax:
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.49\textwidth}\centering
+    \ce{H2CO3 <=> 2H+(aq) + CO3^{2-} + (1/2) H^{.}}
+
+    \ce{H_2 + ^{227}_{90}Th+ ->[\Delta] NO_x}
+
+    A triple bond is \ce{H-C#C-H}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+    \begin{lstlisting}
+\usepackage{mhchem}
+\begin{document}
+    \ce{H2CO7 <-> 2H+(aq) + CO3^{2-} + H^{.}}
+
+    \ce{H_2 + ^{227}_{90}Th+ ->[\Delta] NO_x}
+
+    A triple bond is \ce{H-C#C-H}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\end{figure}
+
+\subsubsection{Geometry}
+For drawing geometry, the package used is \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/generic/chemfig/chemfig-en.pdf}{\texttt{chemfig}}.
+It is extremely powerful, and the documentation is worth exploring if you need to typeset geometry.
+A few examples will be shown below.
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\textwidth}
+    \chemfig{A>:B-[2]C}
+    \qquad \qquad
+    \chemfig{CH_3CH_2-[:-60,,3]C(-[:-120]H_3C)=C(-[:-60]H)-[:60]C|{(CH_3)_3}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{lstlisting}
+\usepackage{chemfig}
+\begin{document}
+    \chemfig{A>:B-[2]C}
+    \qquad \qquad
+    \chemfig{CH_3CH_2-[:-60,,3]C(-[:-120]H_3C)=C(-[:-60]H)-[:60]C|{(CH_3)_3}}
+\end{document}
+\end{lstlisting}
+\end{minipage}
+\end{figure}
