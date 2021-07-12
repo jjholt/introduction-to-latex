@@ -22,6 +22,7 @@ A simple introduction to LaTeX for UCL's engineering faculty
 6. Options: scaling images, styles, etc
 7. Awareness of standard variables `\textwidth`, `\hline`, `\pagebreak`
 8. Emphasis, italics, bold and monospace: `\emph{}`, `textit{}`, `textbf{}`, `texttt{}` and `verb||`
+9. Title page and abstract
 
 ## Mathematics
 1. Inline and display math: `$$` or `\( \)`, `align(*)`, `cases`, `bmatrix`
@@ -31,7 +32,6 @@ A simple introduction to LaTeX for UCL's engineering faculty
 ### `Tikz`
 1. Shapes and a simple control system
 2. Anotating graphs with `node`
-
 ### `Pgfplots`
 1. Use of `addplot` for function, coordinates and data from file
 2. Create table from data using `pgfplotstable`
@@ -43,3 +43,8 @@ A simple introduction to LaTeX for UCL's engineering faculty
 1. Importing graphs as images
 2. Native render from Matlab using `Matlab2Tikz`
 3. Native render from Matlab using `plot2svg` using Inkscape
+
+## Packages worth exploring
+1. `SIUnitx` for SI Units
+2. `mhchem` for chemistry formulae
+3. `chemfig` for chemistry geometry
