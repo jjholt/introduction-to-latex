@@ -27,8 +27,8 @@ To add values with units, the suggestion is to use the package \texttt{siunitx}.
 In fact, this is recommended across any document.
 Basic usage is \verb|\SI{value}{unit}|, and we have the option to either describe the units in text or simply using a symbol: \verb|\ohm| or \verb|ml|.
 
-You have a couple of options with how to produce the label, both shown below.
-Furthermore, \verb|a=| puts it on one side, and \verb|l=| puts it on the other.
+You have a couple of options with how to produce the label, \texttt{[element-name=label]}, or \texttt{[element-name, a=label]}.
+It automatically chooses a good position, but it can be tweaked with \verb|a=| for one side, and \verb|l=| on the other.
 
 \begin{figure}[h]
     \centering
@@ -52,30 +52,31 @@ Furthermore, \verb|a=| puts it on one side, and \verb|l=| puts it on the other.
 \end{figure}
 
 Next let's add an amplifier.
+By default the inverting input is on the top, hence the option \texttt{noinv input up}.
 Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,0)| means a line from (1,1) to (3,1)
 
 \begin{figure}[h]
-    \centering
-    \begin{minipage}{0.54\textwidth}
-        \begin{circuitikz}
-            \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
-            \draw (3,3) to[short,*-] ++ (1,0) node [op amp, noinv input up, anchor=+](opamp){};
-            \draw (opamp.-) -- ++(0,-1) coordinate (intersection) to [R] ++ (0,-1.5) node[ground]{};
-            \draw (intersection) to[R] (opamp.out |- intersection) to[short,-*] (opamp.out) to[short,-o] ++(0.3,0) node[above] { \( v_{out} \) };
-        \end{circuitikz}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.45\textwidth}
-    \begin{lstlisting}
-\begin{circuitikz}
-\draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
-\draw (3,3) to[short,*-] ++ (1,0) node [op amp, noinv input up, anchor=+](opamp){};
-\draw (opamp.-) -- ++(0,-1) coordinate (intersection) to [R] ++ (0,-1.5) node[ground]{};
-\draw (intersection) to[R] (opamp.out |- intersection) to[short,-*] (opamp.out) to[short,-o] ++(0.3,0) node[above]{ \(v_{out}\) };
-\end{circuitikz}
-    \end{lstlisting}    
-    \end{minipage}
+\centering
+    \begin{circuitikz}
+        \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
+        \draw (3,3) to[short,*-] ++ (2,0) node [op amp, noinv input up, anchor=+](opamp){};
+        \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o] ++ (0.2,0) node[above]{ \( v_{out} \) };
+        \draw (opamp.-) -- (intersection);
+    \end{circuitikz}
 \end{figure}
+
+\begin{lstlisting}
+\begin{circuitikz}
+    \draw (0,0) to[sV=\SI{5}{V}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
+    \draw (3,3) to[short,*-] ++ (2,0) node [op amp, noinv input up, anchor=+](opamp){};
+    \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o] ++ (0.2,0) node[above]{ \( v_{out} \) };
+    \draw (opamp.-) -- (intersection);
+\end{circuitikz}
+\end{lstlisting}    
+
+The usage of \texttt{|-} and \texttt{-|} may take some getting used to.
+\verb!(opamp.out |- intersection)! means ``the coordinates for the intersection between \texttt{opamp.out} and \texttt{intersection}''.
+However, \texttt{(0,0) |- (1,1)} creates the lines \texttt{(0,0) -- (0,1) -- (1,1)}; while \texttt{(0,0) |- (1,1)} creates the line \texttt{(0,0) -- (1,0) -- (1,1)}.
 
 In the same way that you can create nodes at any point to include text or an image (in this case, the amplifier), you can also give the coordinates a name.
 Bear in you mind you can also create the amplifier with \verb|\node|, as per the example below.
