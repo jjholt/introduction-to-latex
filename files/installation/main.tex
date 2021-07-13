@@ -1,0 +1,80 @@
+\section{Installing \LaTeX}
+Thre are two main options: TeX Live and MiKTeX, both put together all the underlying components that are necessary to create documents.
+
+\subsection{MiKTeX}
+MiKTeX can be downladed for Windows, Mac OS and Linux: \href{https://miktex.org/download}{link}.
+
+\subsection{TeX Live}
+\href{https://www.tug.org/texlive/}{Link} to all the instructions.
+The web page is pure text, so the navigation can be a little challenging.
+Below is some information which links to the appropriate area.
+
+\subsubsection{Mac}
+To install MacTeX, follow the instructions \href{https://www.tug.org/mactex/mactex-download.html}{link}
+
+MacTeX will install TeX Live, plus a few other utilities.
+Either of the suggested editors will still need to be installed.  
+
+\subsubsection{Linux}
+Your package manager will have a TeX Live distribution. \href{https://wiki.archlinux.org/title/TeX_Live}{Link} to the Arch Linux wiki.
+
+Fedora and other RPM based distributions can download it with
+\begin{lstlisting}
+    # dnf install texlive-scheme-full
+\end{lstlisting}
+
+Debian/Ubuntu:
+\begin{lstlisting}
+    # apt-get install texlive
+\end{lstlisting}
+
+\section{Installing an IDE}
+\subsection{Visual Studio Code}
+\href{https://code.visualstudio.com/}{Download}
+
+VSCode is a general purpose editor, and if you plan on doing any programming at all, it may be worth becoming more familiar with it.
+Microsoft has an excellent introduction to it in their \href{https://code.visualstudio.com/docs}{website}.
+
+In order to give VSCode the ability to work with and compile \LaTeX{}, we must install the LaTeX Workshop extension.
+Start by opening the extensions on the side bar (shortcut: \texttt{ctrl+shift+x}).
+Search for ``latex'' and the first option should be LaTeX Workshop published by James Yu.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.8\textwidth]{figures/extension.png}
+\label{fig:extension}
+\caption{Installing LaTeX Workshop}
+\end{figure}
+
+\subsubsection{Compilation}
+Unless changed in the settings, your \texttt{.tex} will be compiled on saving the file.
+If compile on save does not trigger, you can manually do it with a few different options:
+\begin{enumerate}
+    \item Open the command pallet (\verb|ctrl+shift+P|), type ``latex build'' and select the option ``LaTeX Workshop: Build LaTeX Project''
+    \item On the top right, while in a \texttt{.tex} file, click the green arrow (\texttt{ctrl+alt+B}).
+    \begin{figure}[h]
+    \centering
+        \includegraphics[width=0.8\textwidth]{figures/build.png}
+    \label{fig:build}
+    \caption{Manually building LaTeX project}
+    \end{figure}
+\end{enumerate} 
+
+\subsubsection{Other}
+The LaTeX Workshop extension should also give you access to another tab on the left-hand side.
+This includes navigating the document's structure and seeing helpful math symbols.
+\begin{figure}[h]
+\centering
+    \includegraphics[width=\textwidth]{figures/symbols.png}
+\label{fig:symbols}
+\caption{Accessing useful tools provided by LaTeX Workshop}
+\end{figure}
+
+\subsection{TeXstudio}
+\href{https://www.texstudio.org/}{Download}
+
+TeXstudio is an IDE dedicated to \LaTeX{}, so there is minimal setup. Simply download and you're ready to go!
+
+\section{Online editing}
+If you need a tool similar to Google Drive/One Drive for online collaboration, the most popular option is \href{https://www.overleaf.com/}{Overleaf}.
+UCL students and staff have access to professional accounts on Overleaf, and the link to activate it can be found in the software database: \href{https://swdb.ucl.ac.uk/package/view/id/1235}{here}.
