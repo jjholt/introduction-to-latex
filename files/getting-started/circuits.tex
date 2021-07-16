@@ -29,7 +29,7 @@ Basic usage is \verb|\SI{value}{unit}|, and we have the option to either describ
 
 You have a couple of options with how to produce the label, \texttt{[element-name=label]}, or \texttt{[element-name, a=label]}.
 It automatically chooses a good position, but it can be tweaked with \verb|a=| for one side, and \verb|l=| on the other.
-
+\clearpage
 \begin{figure}[h]
     \centering
     \begin{minipage}{0.39\textwidth}\centering
@@ -50,7 +50,6 @@ It automatically chooses a good position, but it can be tweaked with \verb|a=| f
     \end{lstlisting}    
     \end{minipage}
 \end{figure}
-
 Next let's add an amplifier.
 By default the inverting input is on the top, hence the option \texttt{noinv input up}.
 Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,0)| means a line from (1,1) to (3,1)
@@ -76,7 +75,8 @@ Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,
 
 The usage of \texttt{|-} and \texttt{-|} may take some getting used to.
 \verb!(opamp.out |- intersection)! means ``the coordinates for the intersection between \texttt{opamp.out} and \texttt{intersection}''.
-However, \texttt{(0,0) |- (1,1)} creates the lines \texttt{(0,0) -- (0,1) -- (1,1)}; while \texttt{(0,0) |- (1,1)} creates the line \texttt{(0,0) -- (1,0) -- (1,1)}.
+However, \texttt{(0,0) |- (1,1)} creates the lines \verb|(0,0) -- (0,1) -- (1,1)|.
+On the other hand, \texttt{(0,0) |- (1,1)} creates the line \verb|(0,0) -- (1,0) -- (1,1)|.
 
 In the same way that you can create nodes at any point to include text or an image (in this case, the amplifier), you can also give the coordinates a name.
 Bear in you mind you can also create the amplifier with \verb|\node|, as per the example below.
@@ -141,4 +141,4 @@ Below you can see an example with only absolute coordinates.
 \end{figure}
 
 It's quite easy to get lost with complicated circuits, so the suggestion is to think about it in terms of a continuous line drawing.
-You will notice this circuit drawns the horizontal lines across the the resistors, then across the capacitors, then the vertical lines. 
+You will notice this circuit draws the horizontal lines across the the resistors, then across the capacitors, then the vertical lines. 

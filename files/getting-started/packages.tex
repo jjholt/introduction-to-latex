@@ -17,8 +17,8 @@ Generally this is the go-to package for proper typesetting of units both in text
 Some are made easier: \SIrange{5}{10}{\kg}, \si{\ug}
 \end{lstlisting}
 \end{minipage}
-
 \end{figure}
+\clearpage
 \subsection{Chemistry}
 \subsubsection{Formulae}
 The package \href{https://texdoc.org/serve/mhchem/0}{\texttt{mhchem}} is the go-to for chemical formulae with very simple syntax:
@@ -29,18 +29,18 @@ The package \href{https://texdoc.org/serve/mhchem/0}{\texttt{mhchem}} is the go-
 
     \ce{H_2 + ^{227}_{90}Th+ ->[\Delta] NO_x}
 
-    A triple bond is \ce{H-C#C-H}
+    A triple bond is \ce{H-C#CH}
 \end{minipage}
 \hfill
 \begin{minipage}{0.49\textwidth}
     \begin{lstlisting}
 \usepackage{mhchem}
 \begin{document}
-    \ce{H2CO7 <-> 2H+(aq) + CO3^{2-} + H^{.}}
+\ce{H2CO3 <=> 2H+(aq) + CO3^{2-} + (1/2) H^{.}}
 
-    \ce{H_2 + ^{227}_{90}Th+ ->[\Delta] NO_x}
+\ce{H_2 + ^{227}_{90}Th+ ->[\Delta] NO_x}
 
-    A triple bond is \ce{H-C#C-H}
+A triple bond is \ce{H-C#CH}
 \end{document}
 \end{lstlisting}
 \end{minipage}
