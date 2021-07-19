@@ -1,4 +1,17 @@
 Typesetting documents faster comes down to becoming more familiar with VSCode and the use of snippets.
+
+In case you are unfamiliar with the symbols:
+\begin{table}[h] \centering
+\begin{tabular}{cc}
+    Symbol & Meaning \\ \hline
+    \keys{\Alt} &\texttt{alt}\\ 
+    \keys{\shift} & \texttt{shift}\\
+    \keys{\cmd} & \texttt{command}\\
+    \keys{\tab} & \texttt{tab}
+\end{tabular}
+\end{table}
+
+Note the difference between tab (\keys{\tab}) and right-arrow (\keys{\arrowkeyright}).
 \section{Becoming familiar with VSCode}
 It's worth taking a look at the official trips and tricks: \href{https://code.visualstudio.com/docs/getstarted/tips-and-tricks}{link}.
 We will cover some of the simpler ones which are used constantly.
@@ -38,37 +51,25 @@ More information on writing your own snippets can be found \href{https://code.vi
 A few examples will be presented, and we will go over the keybindings to very quickly produce them.
 Bear in mind the pure text sections will just be ignored.
 
-\paragraph{Note:}
-In case you are unfamiliar with the symbols:
-\begin{table}[h] \centering
-\begin{tabular}{cc}
-    Symbol & Meaning \\ \hline
-    \keys{\Alt} &\texttt{alt}\\ 
-    \keys{\shift} & \texttt{shift}\\
-    \keys{\cmd} & \texttt{command}\\
-    \keys{\tab} & \texttt{tab}
-\end{tabular}
-\end{table}
-
 \subsection{Example - Logarithms}
 This is a small section from the wikipedia article \href{https://en.wikipedia.org/wiki/Irrational_number#Logarithms}{Logarithms} which we recreate.
 Highlighted below are only the snippets, so you would still have to manually write things like \verb|\log_2 3| for \( \log_2 3 \).
 
 \begin{figure}[h]
 \centering
-    \includegraphics[width=0.6\textwidth]{figures/logarithmns.png}
+    \includegraphics[width=0.5\textwidth]{figures/logarithmns.png}
 \end{figure}
 
 \begin{enumerate}
     \item \keys{sse + \tab} creates \verb|\section{}|. \keys{\tab} again after typing ``Logarithmns'' to move cursor out of the brackets.
-    \item For the intext maths, the time saving is \keys{$\backslash$( + \tab}.
+    \item For the intext maths, \keys{$\backslash$( + \tab}.
     \item \keys{bseq + \tab } quickly creates the unnumbered \texttt{equation*} environment
-    \item \keys{@/ + \tab} to create the fraction. type \keys{m + \tab + n}
+    \item To create \( \frac{m}{n}  \), \keys{@/ + \tab} for the fraction, then \keys{m + \tab + n}
     \item For the next maths environment, we use \keys{bsal+\tab} --- creating an \texttt{align*} environment
-    \item \keys{2 + ** + \tab + m/n + \tab} creates \( 2^{m/n} \)
-    \item Finally, to get the right positioning for \( ^n \), we think a little bit ahead: \keys{\{ + 2 + ** + \tab + m/n } will produce \verb|{2^{m/n}}|.
-    \item Move to the end of the line with \keys{\ctrl+\arrowkeyright} (Mac: \keys{\cmd+\arrowkeyright}), then you can finish writing \verb|{2^{m/n}}^n|.
+    \item To create \( 2^{m/n} \) quickly, we type \keys{2 + ** + \tab + m/n + \tab}.
+    \item Finally, to write \( {2^{m/n}}^n \), we need to think ahead about the position of \( ^n \). \keys{\{ + 2 + ** + \tab + m/n } will produce \verb|{2^{m/n}}|. Move to the end of the line with \keys{\ctrl+\arrowkeyright} (Mac: \keys{\cmd+\arrowkeyright}), then you can finish writing \verb|{2^{m/n}}^n|.
 \end{enumerate}
+
 \subsection{Example - Integral}
 \begin{align*}
     I &= \int_{0}^{\infty} \frac{2}{3} x^2 \,dx \\
@@ -92,5 +93,3 @@ Highlighted below are only the snippets, so you would still have to manually wri
     \item Again, use \keys{\Alt + \shift + \arrowkeyleft}/\keys{\arrowkeyright} to quickly select \( \Big|_{0}^{\infty} \) and move it to its appropriate place.
     \item Change the other numbers appropriately.
 \end{enumerate}
-\subsection{Example - }
-\subsection{Example - }
