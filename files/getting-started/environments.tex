@@ -66,10 +66,11 @@ With the output as seen in Figure \ref{fig:figures}
     \label{fig:figures}
 \end{figure}
 
-\verb|\begin{figure}...\end{figure}| creates a figure \emph{environment}.
-\LaTeX\ tries to find the best position for every environment, but you can force their position by passing the option \verb|[h]|.
+\emph{Environments} are generally created with \verb|\begin{environment-name}|\dots\verb|\end{environment-name}|, so  
+\verb|\begin{figure}...\end{figure}| creates a \texttt{figure} environment.
+\LaTeX\ tries to find the best position for every environment, but some of them can be forced to an exact position by passing the option \verb|[h]|.
 Usually contents are left-adjusted, so we can push the environment to the centre by using \verb|\centering|.
-\verb|\caption{}| automatically numbers sequentially.
+\verb|\caption{}| creates a caption and automatically numbers it sequentially.
 
 \verb|tikz| provides the \verb|\includegraphics{}| command that imports our picture.
 Often we need to scale pictures, which can be achieved with the options \verb|width=0.5\textwidth| or \verb|scale=0.8|.
@@ -164,9 +165,9 @@ Finally, the horizontal line after the head rows is created with the code in lin
         every head row/.style={after row=\hline}, %chktex 44
     ]{Examples/Example2/cheese-prices.dat}
     \caption{Replicated from a table!}
-\end{table}     
+\end{table}
 
-Generally tables are best kept simple, but there is a lot of customising that can be done.
+Generally tables are best kept simple, without vertical bars, etc, but there is a lot of customising that can be done.
 The documentation for \texttt{pgfplotstable} can be found \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/graphics/pgf/contrib/pgfplots/doc/pgfplotstable.pdf}{here}.
 
 \subsection{Lists}
@@ -176,7 +177,6 @@ Take a look at the code in \verb|animal-lefts.tex|.
 \lstinputlisting[language=tex, caption={animal-lefts.tex}]{files/getting-started/Example2/files/animal-lefts.tex}
 
 Resulting in:
-
 \begin{figure}[h]
     \centering
         \includegraphics[scale=0.8]{figures/list.png}
