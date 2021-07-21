@@ -36,8 +36,14 @@
         \end{equation*}
 
         If you are familiar with programming, this may remind you of a \emph{markup} language, and that's exactly what it is!
-        In short, we have a plain text file saved in \texttt{.tex} that contains instructions on how to compile it to \texttt{.pdf}.
-        Inbetween that we see the actual content for the document.
+        In short, we have a plain text file saved in \texttt{.tex} that contains information on what is needed to compile it to \texttt{.pdf}, and what the actual document is.
+
+        If you are used to dragging and dropping graphics into a document and spending time trying to find the exact place for it, \LaTeX\ may seem a little verbose.
+        But bear in mind, typing a line of code with auto-complete, suggestions, etc may end up quicker than doing it visually.
+        For context, this is what it would look like:
+        \begin{lstlisting}
+\includegraphics[width=0.5\textwidth]{figures/example.png}
+        \end{lstlisting}
 
         Let's briefly explore some key \LaTeX\ concepts.
         Don't worry about fully understanding them now.
@@ -46,11 +52,12 @@
 \section{Markup language}
     Plain text is written like plain text, but most of LaTeX's power comes from its markups.
     A backslash, \verb|\|, creates a markup; curly brackets \verb|{}| indicate an \emph{argument}, and square brackets \verb|[]| (optionally) provide options.
-    So \verb|\section{Introduction}| would create an Introduction header. 
+    So \verb|\section{Introduction}| would create an Introduction header at a \texttt{section} level (similar to H1 in Word). 
+    \verb|\includegraphics{}|, as we saw earlier, includes the graphic given as an argument.
 
     Generally, we are either creating an environment, defining instructions or using variables:
 
-    \paragraph{Environments}
+    \paragraph{Environments:}
     introduce some kind of formatting, such as lists, math mode or more complicated things.
     With very few exceptions, environments have the following format:
         
@@ -62,18 +69,18 @@
         
     In our example, we created both the required \texttt{document} environment, and the math display \texttt{equation*}.
         
-    \paragraph{Instructions}
+    \paragraph{Instructions:}
     define some feature of the document. This ranges from breaking a page, to creating double-spacing, defining the document's class, and much more. In our example you can see:
 
     \verb|\documentclass[...]{article}|
         
-    \paragraph{Variables}
+    \paragraph{Variables:}
     range from greek letters to the integral sign to a whole expression.
-    Some examples seen are \verb|\geq| (\textbf{g}reater or \textbf{eq}ual) and \verb|\int| ($\int$).
-    Intuitively, \verb|\alpha| results in $\alpha$, and they can even be user-defined.
+    Some examples seen are \verb|\geq| (\textbf{g}reater or \textbf{eq}ual, \( \geq \)) and \verb|\int| ($\int$).
+    Intuitively, \verb|\alpha| results in $\alpha$, and you can even create your own variables!
         
     \paragraph{Note:}
-    Like other programming languages, there are certain reserved characters with predefined meaning, such as \verb|\|, \verb|{|, \verb|}| and \verb|&|.
+    Like other programming languages, there are certain reserved characters with predefined meaning, such as \verb|\|, \verb|{|, \verb|}|, \verb|&| and a few others.
     To use the literal curly brackets, ampersand, etc we would need to \emph{escape} them.
     Conveniently, this is done with a backslash (\verb|\|), so feel free to think of them as variables: \verb|\{|, \verb|\}| and \verb|\&|.
 
