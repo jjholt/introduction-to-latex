@@ -3,14 +3,21 @@ Using it has two distinct moments: Adding an entry to our bibliography, and citi
 
 \subsection{Creating a bibiliography}
 A bibliography file has a \verb|.bib| extension, and each entry has a very specific format.
-Let's start with creating the file \verb|bibliography.bib|, so our working directory looks like this:
+Let's start with creating the file \verb|bibliography.bib|, so our working directory looks like the following.
+Note you can this in \texttt{Examples/Example1}.
 \begin{verbatim}
-Example
+Example1
 ├── bibliography.bib
 └── example.tex
 \end{verbatim}
 
-Each entry has a source, whether \verb|article|, \verb|book|, \verb|misc| or many more and has the following format:
+Now we let the document know where to find the bibliography file using \verb|\bibliography{bib-file}|.
+In our case, \texttt{bib-file} is called \verb|bibliography.bib|, therefore in the \texttt{example.tex} file we include the following:
+\begin{lstlisting}
+\bibliography{bibliography}
+\end{lstlisting}
+
+Each bibliographical entry has a type, whether \verb|article|, \verb|book|, \verb|misc| or many more, and they follow some variation of the following format:
 \begin{lstlisting}
 @article{ GerberLeahR2005, %Unique identifier
   author    = {Gerber, Leah R and Beger, Maria and McCarthy, Michael A and Possingham, Hugh P},
@@ -22,19 +29,21 @@ Each entry has a source, whether \verb|article|, \verb|book|, \verb|misc| or man
   publisher = {Blackwell Science Ltd},
   number    = {8},
   year      = {2005},
-  edition   = {Editor, Ransom Myers Manuscript received 15 March 2005 First decision made 21 April 2005 Manuscript accepted 6 May 2005},
 },
 \end{lstlisting}
 
 It's worth highlighting that the basic format is essentially \verb|@article{ID,...}|, with each entry being separated by commas.
+
 BiBTeX will handle ``et al'' and other conventions as long as you stick to the following format for the author:
 \begin{lstlisting}
 author = {LastName1, FirstName1 and LastName2, FirstName2 and...},
 \end{lstlisting}
 
 The good side is that you rarely, if ever, need to type it out yourself.
-When you find an article through UCL's library, JAMA, Science Direct and many other resources, there will be an option to \textbf{export citation to BiBTeX}.
+When you find an article through UCL's library, JAMA, Science Direct and many other resources, there will be an option to \textbf{export to BiBTeX}.
 Simply copy the contents to your bibliography file and you're ready to cite!
+See Figure \ref{fig:ucl-lib} for an example using UCL's library.
+\clearpage
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{figures/ucl-lib.png}
@@ -43,21 +52,21 @@ Simply copy the contents to your bibliography file and you're ready to cite!
 \end{figure}
 
 \subsection{Manually adding a bibliography entry}
-While in a \verb|.bib| file, you can easily create a scaffold for a bibliography entry.
+While in a \verb|.bib| file, VSCode allows you to easily create a scaffold for a bibliography entry, including the basic required fields for that entry type.
 Simply type \verb|@| and press \verb|Ctrl+space| to see the suggestions.
-Generally this is only used for citing random websites, for which we use the \verb|@misc| option.
-The scaffold will include all the basic requirements to generate a good bibiliography entry.
+Generally this is only used for citing websites, for which we use the \verb|@misc| option.
 \begin{figure}[h]
   \centering
-    \includegraphics[width=\textwidth]{figures/bib-entry.png}
+    \includegraphics[width=0.8\textwidth]{figures/bib-entry.png}
   \caption{Autocompleting a bibliography entry in a \texttt{.bib} file.}
   \label{fig:bib-entry}
 \end{figure}
 
 \subsection{Citations}
-Now we just need to let our document know where to find our bibliography file, which we had called \verb|bibliography.bib| and we can use \verb|\cite{}| (or its variants) to do in-text citations.
+and we can use \verb|\cite{}| (or its variants) to do in-text citations.
 Every cited entry automatically gets added to a Reference section at the end of the document.
 If you want to include any non-cited entry, use \verb|\nocite{id}|; and to include all entries: \verb|\nocite{*}|.
+\clearpage
 \lstinputlisting[language=tex, caption={example.tex}]{"Example/example.tex"}
 
 Giving us the following output:
@@ -89,6 +98,7 @@ A really important feature of VSCode is Intellisense, these automatic suggestion
 In the case of bibliography, it looks in the \verb|.bib| file we indicate in the preamble, as you can see in Figure \ref{fig:intellisense}.
 If you are not getting suggestions, try activating Intellisense by pressing \verb|ctrl+space|.
 It also works with various other tags. Try typing \texttt{\textbackslash}, then pressing \verb|ctrl+space| to see the enourmous list.
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/intellisense.png}
