@@ -1,26 +1,28 @@
 A LaTeX file has a \verb|.tex| extension, and begins with what we call a \emph{preamble} --- declaring the \emph{class} of document, followed by \verb|\begin{document}...\end{document}|.
-\lstinputlisting[language=tex]{files/getting-started/example1.tex}
+\lstinputlisting[language=tex,caption={\texttt{example.tex}}]{files/getting-started/example1.tex}
 
 Producing the following output:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{figures/chapters.png}
+    \includegraphics[width=0.8\textwidth]{figures/chapters.png}
     \label{fig:chapters}
 \end{figure}
 
 Generally, we declare a document class with \texttt{\textbackslash documentclass[option1, \ldots]\{class\}}, with the most commonly used classes being \verb|article| and \verb|report|.
-Every class has a different set of default behaviours, such as \verb|report| providing a title page, but we can give give it \emph{options}.
-The option we set was to change the font size from the default \verb|10pt| to \verb|12pt|.
-
-Another option commonly used in academia is \verb|twocolumn| to produce a two column document.
+Every class has a different set of default behaviours, such as \texttt{report} providing a title page.
 You can find more options and information on default behaviour on \href{https://texblog.org/2013/02/13/latex-documentclass-options-illustrated/}{this} link.
 
+Default behaviours can also be modified by providing \emph{options}.
+You can easily spot them, as they come between square brackets \verb|[]| following some markup.
+The option in this example was to change the font size from the default \verb|10pt| to \verb|12pt|.
+
+Another option worth mentioning is \verb|twocolumn|, used to produce two column documents commonly seen in academia.
+
 Later on we will come back to the \emph{preamble} for other important commands.
-Generally we create templates, so it isn't necessary to remember every small detail, and very quick to get started on a new document.
+Generally we create and use templates, so we don't need to remember every small detail, and it becomes quite easy to quickly get your new document up and running.
 
 \subsection{Paragraph}
-
 You will notice that the first paragraph consists of both lines 3 and 4.
 This is because a paragraph is only created by having a full empty line (like line 5).
 One advantage to separating sentences by a new line is that you can more readily move, copy and delete them in your editor.
@@ -35,7 +37,8 @@ If you really want to force a paragraph without indentation, use \verb|\\| at th
 % \paragraph{Note} Including an empty line after \verb|\\| will result in a very common warning: \verb|Underfull hbox|. More information on this later in the common errors and warnings section.
 
 \subsection{Sectioning}
-The basic way we separate documents is into \verb|section|, \verb|subsection| and \verb|paragraph|.
+Documents with the \texttt{article} class are primarily separated into \verb|section|, \verb|subsection|, \verb|\subsubsection| and \verb|paragraph|, with the first two showing up in a table of contents.
+A \texttt{report} has, in addition to the above, \verb|\part| and \verb|\chapter|.
 
 \lstinputlisting[language=tex, caption={\texttt{example2.tex}}]{"./files/getting-started/example2.tex"}
 
