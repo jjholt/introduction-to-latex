@@ -1,21 +1,23 @@
 \section{Installing \LaTeX}
-Thre are two main options: TeX Live and MiKTeX, both put together all the underlying components that are necessary to create documents.
+Thre are two main options: TeX Live and MiKTeX, both put together all the underlying components that are necessary to create documents, and both exist in all operating systems.
+However, below you can see the recommendations and direct links to get you started.
 
-\subsection{MiKTeX}
-MiKTeX can be downladed for Windows, Mac OS and Linux: \href{https://miktex.org/download}{link}.
+\subsection{Windows}
+Download MiKTeX on this \href{https://miktex.org/download}{link}.
+It even includes step-by-step instructions for the installation wizard, if you so require.
 
-\subsection{TeX Live}
+\subsection{Mac}
+For both Mac and Linux the suggestion is to use variations of TeXlive.  
 \href{https://www.tug.org/texlive/}{Link} to all the instructions.
 The web page is pure text, so the navigation can be a little challenging.
 Below is some information which links to the appropriate area.
 
-\subsubsection{Mac}
 To install MacTeX, follow the instructions \href{https://www.tug.org/mactex/mactex-download.html}{link}
 
 MacTeX will install TeX Live, plus a few other utilities.
 Either of the suggested editors will still need to be installed.  
 
-\subsubsection{Linux}
+\subsection{Linux}
 Your package manager will have a TeX Live distribution. \href{https://wiki.archlinux.org/title/TeX_Live}{Link} to the Arch Linux wiki.
 
 Fedora and other RPM based distributions can download it with
@@ -41,20 +43,33 @@ Search for ``latex'' and the first option should be LaTeX Workshop published by 
 
 \begin{figure}[h]
 \centering
-    \includegraphics[width=0.8\textwidth]{figures/extension.png}
+    \includegraphics[width=0.65\textwidth]{figures/extension.png}
 \label{fig:extension}
 \caption{Installing LaTeX Workshop}
 \end{figure}
 
+\subsubsection{Editor settings}
+Feel free to play around with the settings, themes, etc to find what you like, but there is one specific setting that is an absolute must:
+disabling ``Snippets Prevent Quick Suggestions''.
+
+To do so, open the settings with \texttt{ctrl + ,} (Mac: \texttt{cmd + ,}), search for \texttt{editor.suggest.snippets}, and disable it/set it to false.
+
+\begin{figure}[h]
+\centering
+    \includegraphics[width=0.8\textwidth]{figures/quick-suggests.png}
+    \label{fig:quick-suggests}
+    \caption{Disabling Snippets Prevent Quick Suggestions}
+\end{figure}
+
 \subsubsection{Compilation}
 Unless changed in the settings, your \texttt{.tex} will be compiled on saving the file.
-If compile on save does not trigger, you can manually do it with a few different options:
+If compilation on save does not trigger, you can manually do it with a few different options:
 \begin{enumerate}
     \item Open the command pallet (\verb|ctrl+shift+P|), type ``latex build'' and select the option ``LaTeX Workshop: Build LaTeX Project''
     \item On the top right, while in a \texttt{.tex} file, click the green arrow (\texttt{ctrl+alt+B}).
     \begin{figure}[h]
     \centering
-        \includegraphics[width=0.8\textwidth]{figures/build.png}
+        \includegraphics[width=0.6\textwidth]{figures/build.png}
     \label{fig:build}
     \caption{Manually building LaTeX project}
     \end{figure}
@@ -65,7 +80,7 @@ The LaTeX Workshop extension should also give you access to another tab on the l
 This includes navigating the document's structure and seeing helpful math symbols.
 \begin{figure}[h]
 \centering
-    \includegraphics[width=0.8\textwidth]{figures/symbols.png}
+    \includegraphics[width=0.7\textwidth]{figures/symbols.png}
 \label{fig:symbols}
 \caption{Accessing useful tools provided by LaTeX Workshop}
 \end{figure}
