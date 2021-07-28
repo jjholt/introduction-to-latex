@@ -1,16 +1,16 @@
 Make sure to include \verb|\usepackage{circuitikz}| in your document.
 
 \begin{enumerate}
-\item The end goal is to create the circuit below.
+\item Attempt to recreate the circuit below. 
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}
         \draw
-            (-1,-2) node[ground](){} to[short, o-o] (13.3,-2)
-            [->] (-1,-1.8) -- node[fill=white](){5V}(-1,3.3)
+            (-1,-2) node[ground]{} to[short, o-o] (13.3,-2) %Ground line
         ;
         \draw
-            [->] (13.3,-1.8) -- node[fill=white](){$V_{out}$}(13.3,1.3)
+            [->] (-1,-1.8) -- node[fill=white]{5V}(-1,3.3)
+            [->] (13.3,-1.8) -- node[fill=white]{$V_{out}$}(13.3,1.3)
         ;
         \draw
             (-1,3.5) to[short,o-] (0,3.5) |- (3,3.5) to[short] ++ (0,-0.5)
@@ -34,6 +34,7 @@ Make sure to include \verb|\usepackage{circuitikz}| in your document.
         ;
     \end{tikzpicture}
 \end{figure}
+\clearpage
 \item While it is very similar to the previous exercise, the objective is to create it more efficiently.
 \begin{figure}[h]\centering
 %%% Coordinate definitions: %%%
