@@ -1,43 +1,54 @@
-Make sure to include \verb|\usepackage{circuitikz}| in your document.
+Make sure to include the \texttt{circuitikz} package by using \verb|\usepackage{circuitikz}| in your document.
 
 \begin{enumerate}
-\item Attempt to recreate the circuit below. 
+\item Attempt to recreate the circuit below.
+Note that you will also need the package \texttt{siunitx}.
+The objective for this exercise is simply to get it done, so no guidance of good practices will be given.
+
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}
-        \draw
-            (-1,-2) node[ground]{} to[short, o-o] (13.3,-2) %Ground line
-        ;
-        \draw
-            [->] (-1,-1.8) -- node[fill=white]{5V}(-1,3.3)
-            [->] (13.3,-1.8) -- node[fill=white]{$V_{out}$}(13.3,1.3)
-        ;
+        \draw (-1,-2) node[ground]{} to[short, o-o] (13.3,-2); %Ground
+        \draw [->] (-1,-1.8) -- node[fill=white]{5V}(-1,3.3); %V_in
+        \draw [->] (13.3,-1.8) -- node[fill=white]{$V_{out}$} (13.3,1.3); %V_out
         \draw
             (-1,3.5) to[short,o-] (0,3.5) |- (3,3.5) to[short] ++ (0,-0.5)
-            (3,3) to [R,a=$\SI{15}{k\ohm}$] (1,1)
-            (3,3) to [R,l=$\SI{4.7}{k\ohm}$] (5,1)
-            (1,1) to [R,a=$\SI{15}{k\ohm}$] (3,-1)
-            (5,1) to [thermistor,l=$R_x$] (3,-1)
-            (3,-1) to[short, -*] ++  (0,-1)
+            (3,3) to [R,a=$\SI{15}{k\ohm}$] (1,1) %Top left resistor
+            (3,3) to [R,l=$\SI{4.7}{k\ohm}$] (5,1) %Top right resistor
+            (1,1) to [R,a=$\SI{15}{k\ohm}$] (3,-1) %Bottom right resitor
+            (5,1) to [thermistor,l=$R_x$] (3,-1) %Bottom left resistor
+            (3,-1) to[short, -*] ++  (0,-1) %Connection to ground
+        ;
+        \node [op amp] (opamp) at (11,1.5) {}; %Create Op amp 
+        \draw
+            (opamp.out) to[short,-o] ++ (1.1,0) %Draw output to V_out
+            (5,1) to[R,l=$\SI{10}{k\ohm}$] ++(4,0) coordinate (x) |- (opamp.+)
+            (x) to[R, l=$\SI{68}{k\ohm}$] ++(0,-2) to[short,-*] ++ (0,-1)
         ;
         \draw
-            (11,1.5) node [op amp] (opamp) {}
-            (opamp.out) to[short,-o] ++ (1.1,0)
-            (1,1) -- ++ (0,2) to[crossing] ++ (0,1)
-            ++ (4,0.5)node[op amp] (buffer) {}
-            (buffer.+) -- ++ (-2.82,0)
-            (buffer.out) -- ++ (0,1.5) -| (buffer.-)
-            (buffer.out) to [R,l=$\SI{10}{k\ohm}$] ++ (3,0) node[](y){} |- (opamp.-)
-            (y) to[R,l=$\SI{68}{k\ohm}$] ++ (2.5,0) -| (opamp.out) 
-            (5,1) to[R,l=$\SI{10}{k\ohm}$] ++(4,0) node(x)[]{} |- (opamp.+)
-            (x) to[R, l=$\SI{68}{k\ohm}$] ++(0,-2) to[short,-*] ++ (0,-1)
+            (1,1) -- ++ (0,2) to[crossing] ++ (0,1) %From left-bridge towards buffer
+            |- ++ (4,0.5) node[op amp, anchor=+] (buffer) {} %Create buffer
+            (buffer.-) -- ++ (0,1) -| (buffer.out) %connect inverting input and output
+            to [R,l=$\SI{10}{k\ohm}$] ++ (3,0) coordinate (y)
+            -| (opamp.-) %Betwen 10k and 68k to inverting input
+            (y) to[R,l=$\SI{68}{k\ohm}$] ++ (2.5,0)
+            |- (opamp.out) %68k to output  
         ;
     \end{tikzpicture}
 \end{figure}
+
+Below is a suggested order for which you can check the solutions.
+The choice of values is arbitrary, so feel free to choose your own.
+    \begin{enumerate}
+        \item Create the ground line; the input and output terminals.
+        \item Add the wheatstone bridge.
+        \item Create the bottom op amp and both resistors attached to its non-inverting input.
+        \item From the left side of the bridge to the buffer's non-inverting input.
+        \item From the buffer's inverting input to its output, then the resistors.
+    \end{enumerate}
 \clearpage
-\item While it is very similar to the previous exercise, the objective is to create it more efficiently.
+\item While it is very similar to the previous exercise, the objective is to create it more easily and with full explanations.
 \begin{figure}[h]\centering
-%%% Coordinate definitions: %%%
 % Position of the bridge (top upper corner)
     \newcommand{\x}{4.5}
     \newcommand{\y}{6}
@@ -65,7 +76,8 @@ Make sure to include \verb|\usepackage{circuitikz}| in your document.
         node[ground]{} %Ground
     ;
     \draw
-        (bridge-left) |- (\x+\dx, 1.2*\y)
+        (bridge-left) -- (\x-\dx,0.8*\y) to[crossing] (\x-\dx,1.2*\y) |- (\x+\dx, 1.2*\y)
+        % (bridge-left) |- (\x+\dx, 1.2*\y)
         -- (opamp.- -| \x+\dx, 1.2*\y) %coordinates for intercept between opamp.- and (\x+\dx, 1.2*\y)
         to [R,a=\(R_1\),-*] (opamp.-) %R_1
         -- ++ (0,1.5) coordinate (z) %Call it z because we don't know where it is, but need the coordinates for next line 
@@ -110,6 +122,10 @@ Make sure to include \verb|\usepackage{circuitikz}| in your document.
             \item Draw a line from this point to its intersection with \verb|(opamp.-)|. The coordinates for this intersection are created with \verb!(opamp.- -| \x+\dx, 1.2*\y)!.
             \item A similar technique is needed for \( R_2 \), but you may want to use relative coordinates to define its height. This means you won't know the coordinates to create an intersection, but by giving it an identifier \verb|z|, you can use \verb!(opamp.out |- z)!.
             \item The ``open connection'' is given by the option \verb|-o|, which can be combined with the other ``connection dot''. In particular, we use \verb|[*-o]| to create the connection at \( V_0 \). 
+            \item If you want the small crossing symbol, you may need something like:
+            \begin{lstlisting}
+(bridge-left) -- (\x-\dx,0.8*\y) to[crossing] (\x-\dx,1.2*\y) |- (\x+\dx, 1.2*\y)
+            \end{lstlisting}
         \end{itemize}
     \end{enumerate}
 \end{enumerate}
