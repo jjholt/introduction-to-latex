@@ -2,7 +2,8 @@ We draw circuits using the \texttt{circuitikz} package.
 All of the knowledge from \texttt{Tikz} will come in handy, with the benefit that electrical components have already been created and given names.
 The \href{https://mirror.ox.ac.uk/sites/ctan.org/graphics/pgf/contrib/circuitikz/doc/circuitikzmanual.pdf}{documentation} has a component list, and you can find the name for the exact component you need.
 
-Let's create our first circuit:
+\subsubsection{Our first circuit}
+% Let's create our first circuit:
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.39\textwidth}\centering
@@ -14,22 +15,26 @@ Let's create our first circuit:
 \begin{minipage}{0.59\textwidth}
 \begin{lstlisting}
 \usepackage{circutikz}
-\begin{document}
-    \begin{circuitikz}
-        \draw (0,0) to[sV] (0,3) -- (3,3) to[R] (3,0) -- (0,0);
-    \end{circuitikz}
-\end{document}
+...
+\begin{circuitikz}
+    \draw (0,0) to[sV] (0,3) -- (3,3) to[R] (3,0) -- (0,0);
+\end{circuitikz}
 \end{lstlisting}    
 \end{minipage}
 \end{figure}
 
+\verb|(0,0) to[component] (1,0)| adds \texttt{component} halfway between the two coordinates.
+The component list is extensive, and therefore the suggestion is to use the documentation.
+There you can also find the name of the anchor points, which will come in handy in the next couple of examples. 
+
+\subsubsection{Adding labels}
 To add values with units, the suggestion is to use the package \texttt{siunitx}.
 In fact, this is recommended across any document.
 Basic usage is \verb|\SI{value}{unit}|, and we have the option to either describe the units in text or simply using a symbol: \verb|\ohm| or \verb|ml|.
 
 You have a couple of options with how to produce the label, \texttt{[element-name=label]}, or \texttt{[element-name, a=label]}.
 It automatically chooses a good position, but it can be tweaked with \verb|a=| for one side, and \verb|l=| on the other.
-\clearpage
+
 \begin{figure}[h]
     \centering
     \begin{minipage}{0.39\textwidth}\centering
@@ -42,24 +47,41 @@ It automatically chooses a good position, but it can be tweaked with \verb|a=| f
     \begin{lstlisting}
 \usepackage{circutikz}
 \usepackage{siunitx}
-\begin{document}
-    \begin{circuitikz}
-        \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R=\SI{100}{\ohm}] (3,0) -- (0,0);
-    \end{circuitikz}
-\end{document}
+...
+\begin{circuitikz}
+    \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R=\SI{100}{\ohm}] (3,0) -- (0,0);
+\end{circuitikz}
     \end{lstlisting}    
     \end{minipage}
 \end{figure}
-Next let's add an amplifier.
-By default the inverting input is on the top, hence the option \texttt{noinv input up}.
-Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,0)| means a line from (1,1) to (3,1)
+
+\subsubsection{Adding an amplifier}
+For this, we need to use the other way of adding components, by creating a \texttt{node} at a particular point.
+We do so with \verb|\node[op amp]|, which results in the line being placed in the centre of the amplifier:
+\begin{figure}[h]
+\begin{minipage}{0.40\textwidth}\centering
+    \begin{circuitikz}
+        \draw[] (0,0) -- (3,0) node[op amp]{};
+    \end{circuitikz}
+\end{minipage}
+\begin{minipage}{0.50\textwidth}
+    \begin{lstlisting}
+\begin{circuitikz}
+    \draw (0,0) -- (3,0) node[op amp]{};
+\end{circuitikz} 
+    \end{lstlisting}
+\end{minipage}
+\end{figure}
+
+To correct this to our needs, we set both an anchor point and indicate the non-inverting input to be on top:
+\verb|node [op amp, noinv input up, anchor=+]{}|.
 
 \begin{figure}[h]
 \centering
     \begin{circuitikz}
         \draw (0,0) to[sV=\SI{5}{\volt}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
         \draw (3,3) to[short,*-] ++ (2,0) node [op amp, noinv input up, anchor=+](opamp){};
-        \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o] ++ (0.2,0) node[above]{ \( v_{out} \) };
+        \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o, l= \( v_{out} \) ] ++ (0.2,0);
         \draw (opamp.-) -- (intersection);
     \end{circuitikz}
 \end{figure}
@@ -68,21 +90,80 @@ Remember, \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,
 \begin{circuitikz}
     \draw (0,0) to[sV=\SI{5}{V}] (0,3) -- (3,3) to[R, a=\SI{100}{\ohm}] (3,0) -- (0,0);
     \draw (3,3) to[short,*-] ++ (2,0) node [op amp, noinv input up, anchor=+](opamp){};
-    \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o] ++ (0.2,0) node[above]{ \( v_{out} \) };
+    \draw (3,0) to[R,-*] (opamp.- |- 3,0) coordinate (intersection) to[R] (opamp.out |- intersection) -- (opamp.out) to[short,-o, l= \( v_{out} \) ] ++ (0.2,0);
     \draw (opamp.-) -- (intersection);
 \end{circuitikz}
 \end{lstlisting}    
 
+Remember: \verb|++ (x,y)| creates relative coordinates, so \verb|(1,1) -- ++ (2,0)| means a line from (1,1) to (3,1)
+
 The usage of \texttt{|-} and \texttt{-|} may take some getting used to.
-\verb!(opamp.out |- intersection)! means ``the coordinates for the intersection between \texttt{opamp.out} and \texttt{intersection}''.
-However, \texttt{(0,0) |- (1,1)} creates the lines \verb|(0,0) -- (0,1) -- (1,1)|.
-On the other hand, \texttt{(0,0) |- (1,1)} creates the line \verb|(0,0) -- (1,0) -- (1,1)|.
+\texttt{(0,0) |- (1,1)} creates the lines \verb|(0,0) -- (0,1) -- (1,1)|.
+Whereas \texttt{(0,0) |- (1,1)} creates the line \verb|(0,0) -- (1,0) -- (1,1)|.
 
-In the same way that you can create nodes at any point to include text or an image (in this case, the amplifier), you can also give the coordinates a name.
-Bear in you mind you can also create the amplifier with \verb|\node|, as per the example below.
+On the other hand, \verb!(opamp.out |- intersection)! means ``the coordinates for the intersection of \texttt{opamp.out} and \texttt{intersection}''. 
+Notice the parenthesis indicating coordinates!
 
-It may have been clear from previous examples, but you don't need to create separate \verb|\draw|.
-The motivation to do so is tidiness and legibility.
+\verb!(opamp.- |- 3,0) coordinate (intersection)!: At any point you can give coordinates an identifier.
+The main motivation is that we don't know the absolute coordinates for this point, but need to refer to it later on.
+Alternatively, if you use the same coordinate continuously, it may be worth naming it as well.
+
+\verb|to[short]| and \verb|--| both produce lines, but the former has some really interesting uses.
+Most importantly is the use of \verb|-*| and \verb|-o|.
+You will notice that in the example we used the code below to create $v_{out}$.  
+\begin{lstlisting}
+(opamp.out) to[short,-o, l= \( v_{out} \) ] ++ (0.2,0)
+\end{lstlisting}
+Like with other components, this is creating the label above/below the midpoint of the component.
+But maybe you want the label to be above the end point, which requires the use of a \texttt{node} at the end coordinates.
+That is:
+\begin{figure}[h]\centering
+\begin{minipage}{0.40\textwidth}\centering
+    \begin{circuitikz}
+        \draw (0,0) to[diode,-o,l=above component] (2,0) ;
+        \draw (0,1.5) to[Do,-o] (2,1.5) node[above]{end};
+        \draw (0,-1.5) node[above]{start} to[leDo,-o] (2,-1.5);
+    \end{circuitikz} 
+\end{minipage}
+\hfill
+\begin{minipage}{0.59\textwidth}
+    \begin{lstlisting}
+\begin{circuitikz}
+    \draw (0,0) to[diode,-o,l=above component] (2,0) ;
+    \draw (0,1.5) to[Do,-o] (2,1.5) node[above]{end};
+    \draw (0,-1.5) node[above]{start} to[leDo,-o] (2,-1.5);
+\end{circuitikz} 
+    \end{lstlisting}
+\end{minipage}
+\end{figure} 
+
+\subsubsection{Other considerations}
+There is a lot \texttt{circuitikz} is capable of which was not covered.
+Do use the \href{https://mirror.ox.ac.uk/sites/ctan.org/graphics/pgf/contrib/circuitikz/doc/circuitikzmanual.pdf}{documentation} when you question how or if something can be done.
+
+\begin{figure}[h]\centering
+    \begin{minipage}{0.45\textwidth}
+        \begin{circuitikz}[european voltages]
+            \draw (0,0) node[ground]{}
+            to[battery] ++ (0,1.5)
+            to[sR, i^=$i_1$] ++ (3,0)
+            to[C,v^>=$v_1$] ++ (0,-1.5) ;
+        \end{circuitikz}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \begin{lstlisting}
+\begin{circuitikz}[european voltages]
+    \draw (0,0) node[ground]{}
+    to[battery] ++ (0,1.5)
+    to[sR, i^=$i_1$] ++ (3,0)
+    to[C,v^>=$v_1$] ++ (0,-1.5) ;
+\end{circuitikz}
+        \end{lstlisting}
+    \end{minipage}
+\end{figure}
+
+While creating a separate \verb|\draw;| for each drawing is not actually necessary, you are encouraged to do so for tidiness and legibility.
+Perhaps separating into sections, continuous lines or however you see fit.
 
 \begin{figure}[h]
     \begin{minipage}{0.45\textwidth}
