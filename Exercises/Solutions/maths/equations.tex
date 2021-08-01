@@ -1,0 +1,29 @@
+\begin{enumerate}
+\item
+    \begin{equation*}
+        f(x) = \int_{0}^{2\pi} \sin(2x) \,dx
+    \end{equation*}
+\item Use \verb|\dot{}| and \verb|\implies|.
+    \begin{align*}
+        \sum \dot{m} = 0 \implies \rho \sum u_i A_i = 0
+    \end{align*}
+\item Use \verb|\partial|.
+    \begin{equation*}
+        \frac{\partial}{\partial y} \left[
+            e^{-\alpha xy} \left( \frac{\alpha - 2}{x} \right)
+        \right]
+        =
+        \frac{\partial}{\partial x} \left[
+            -\frac{1}{\alpha y} \left(
+                e^{- \alpha xy} - 1
+            \right)
+        \right]
+    \end{equation*}
+\item 
+    \begin{align*}
+        & i(t) = i_C(t) + i_R(t) \\
+        & d(t)I = C \frac{d}{dt}v_{out}(t) + \frac{v_{out}(t)}{R} \qquad \{\text{Laplace transform}\} \\
+        & D(s)I = \left( Cs + \frac{1}{R} \right)V_{out}(s) \\
+        & \therefore \frac{V_{out}(s)}{D(s)} = \frac{RI}{RCs+1}
+    \end{align*}
+\end{enumerate}
