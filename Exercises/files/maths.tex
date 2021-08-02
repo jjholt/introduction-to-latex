@@ -1,7 +1,13 @@
 \section{Equations}
-Typeset the following:
+Typeset the following. Some hints:
+\begin{itemize}
+    \item Make sure to decide the right environment (\texttt{align, align*, equation}, etc) and where you want to horizontally align.
+    \item To get squiggly brackets \verb|{}|, use: \verb|\{ text here \}|.
+    \item For normal text in math mode, use \verb|\text{text here}|.
+\end{itemize}
+
 \begin{enumerate}
-    \item
+    \item Use \verb|\,| to space \verb|dx| properly.
         \begin{equation*}
             f(x) = \int_{0}^{2\pi} \sin(2x) \,dx
         \end{equation*}
@@ -21,20 +27,28 @@ Typeset the following:
                 \right)
             \right]
         \end{equation*}
-    \item 
+    \item Use \verb|\therefore|.
         \begin{align*}
             & i(t) = i_C(t) + i_R(t) \\
             & d(t)I = C \frac{d}{dt}v_{out}(t) + \frac{v_{out}(t)}{R} \qquad \{\text{Laplace transform}\} \\
             & D(s)I = \left( Cs + \frac{1}{R} \right)V_{out}(s) \\
             & \therefore \frac{V_{out}(s)}{D(s)} = \frac{RI}{RCs+1}
         \end{align*}
-        \textbf{Hints:}
-        \begin{itemize}
-            \item Make sure to decide the right environment and where you will align each line. There is more than one right answer.
-            \item To get brackets, you must use \verb|\{ text here \}|
-            \item For normal text formatting in math mode, use \verb|\text{text here}|
-            \item The \( \therefore \) is \verb|\therefore|.
-        \end{itemize}
+    \item Use \verb|\vec{}| and the \verb|bmatrix| environment
+    \begin{equation*}
+        \vec{\varepsilon} =
+            \begin{bmatrix}
+                \Delta L_x/L_x \\ \Delta L_y/L_y \\ \Delta L_z/L_z
+            \end{bmatrix}
+        =
+            \begin{bmatrix}
+                0.975-1 \\ 0.975-1 \\ 1.05-1
+            \end{bmatrix}
+        =
+            \begin{bmatrix}
+                -0.025 \\ -0.025 \\ 0.05
+            \end{bmatrix}
+    \end{equation*}
 \end{enumerate}
 
 \section{Graphs}
@@ -59,17 +73,21 @@ Graph the following using \texttt{tikz}/\texttt{pgfplots}:
     \item You may need to increase the number of \texttt{samples} in the plot. Use the option \texttt{samples=150}. 
 \end{itemize}
 \clearpage
-\item Recreate the following logistic curve with equation
+\item Recreate the following logistic curve, including drawn comment.
 \begin{figure}[h]
 \centering
-\begin{minipage}{0.35\textwidth}
+\begin{minipage}{0.35\textwidth} \centering
+    Curve's function:
     \begin{equation*}
         f(x) = \frac{2}{1+e^{-2(x-0.5)}}    
     \end{equation*}
+    \verb|= 2/(1+exp(-2*(x-0.5)))|
 \end{minipage}
 \begin{minipage}{0.60\textwidth}
     \begin{tikzpicture}
-        \begin{axis}[xlabel = \(x \), ylabel = \(f(x)\)]
+        \begin{axis}[
+            xlabel = \(x \), ylabel = \(f(x)\), title=Example logistic curve,
+        ]
             \addplot[samples=150] {2/(1+exp(-2*(x-0.5)))};
             \addplot[dashed, domain=-5:0.5] {1}; 
             \draw[->] (axis cs: -2,1.5) node[above] {Mid point} -- (axis cs: 0.48,1.02);
@@ -83,7 +101,7 @@ Graph the following using \texttt{tikz}/\texttt{pgfplots}:
     \item In order to draw inside an axis at coordinate \verb|(x,y)|, we use \verb|(axis cs: x,y)|.
     \item In the example, the arrow is from \texttt{(-2,1.5)} to \texttt{(0.48,1.02)}
 \end{itemize}
-\item Recreate the following graph. The function is \( f(x) = \frac{1}{2} (1-e^{-2x})\), or \verb|1/2*(1- exp(-2*x))|. 
+\item Recreate the following graph. The function is \( f(x) = \frac{1}{2} (1-e^{-2x})\). 
 \begin{figure}[h]\centering
     \begin{tikzpicture}
     \begin{axis}[
