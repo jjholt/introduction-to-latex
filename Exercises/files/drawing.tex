@@ -1,0 +1,46 @@
+\begin{enumerate}
+    \item Using the \texttt{tikz} package, recreate the following drawing:
+    \begin{figure}[h]\centering
+        \newcommand{\x}{3}
+    \begin{tikzpicture}
+        \draw[-latex, thick] (0,0) -- (5,0) node[right]{$x$};
+        \draw[-latex, thick] (0,0) -- (0,5) node[above]{$y$};
+        \draw[] (0,0) node[below]{a} -- (\x/2,\x) node[above]{b} -- (\x+\x/2,\x)node[above]{c} -- (\x,0) node[below]{d} -- cycle;
+    \end{tikzpicture}
+    \end{figure}
+    \begin{enumerate}
+        \item In a \texttt{tikzpicture} environment, \texttt{draw} the axis lines with length of 5.
+        
+        \textbf{Hint:} Use the options \texttt{[-latex, thick]} to get this particular arrow style.
+        \item Define \verb|\newcommand{\x}{3}|, then draw the parallelogram with vertices at coordinates \verb|(0,0)|, \verb|(\x/2,\x)|, \verb|(\x+\x/2,\x)| and \verb|(\x,0)|.
+        \item Place a \texttt{node} at each vertex and give it a label.    
+    \end{enumerate}
+    \item Recreate the following control system
+    \begin{figure}[h]\centering
+        \begin{tikzpicture}
+            %Blocks
+            \node [block] (G) at (0,0) {G(s)};
+            \node [block, right = 1.5 cm of G,] (controller) {Controller};
+            \node [block, below left = 1 cm of controller] (feedback) {Feedback} ;
+            \node [sum, left = of G] (sum) {};
+            %Arrows
+            \draw[->] (G) -- (controller);
+            \draw[->] (controller.east) -- ++(1.0,0) node [right,above](){Output};
+            \draw[->] (controller.south) |- (feedback.east) ;
+            \draw[->] (feedback.west) -| (sum) node[below left](){+};
+            \draw[->] (sum.west) ++ (-1,0) node[above](){Input}-- (sum.west)
+                (sum.east) -- (G.west)
+            ;
+            \draw[->] (sum.north) ++ (0,0.8) node{Noise} -- (sum.north);
+        \end{tikzpicture}
+    \end{figure}
+
+\textbf{Hints:} \begin{itemize}
+    \item You may want to use the tikz library \texttt{positioning}. Include \verb|\usetikzlibrary{positioning}| in the preamble.
+    \item Use either the template or \verb|\tikzstyle| to define the \texttt{block} and \texttt{sum} styles in the preamble:
+    \begin{lstlisting}
+\tikzstyle{block} = [draw, minimum width = 2cm, minimum height = 1.2cm, fill=blue!5]
+\tikzstyle{sum} = [draw, fill=blue!5, circle, node distance=1cm]
+    \end{lstlisting}
+\end{itemize}
+\end{enumerate}
