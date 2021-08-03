@@ -1,0 +1,25 @@
+\begin{enumerate}
+    \item \begin{enumerate}
+        \item 
+            Create a bibliography file called \texttt{bibliography.bib}. Use UCL's \href{https://ucl-new-primo.hosted.exlibrisgroup.com/primo-explore/search?vid=UCL_VU2}{library} to find 3 entries. Make sure use ``export bibtex''.
+        \item Create an article with two \texttt{section}s. Use the package \texttt{natbib} with the option \texttt{numbers}, then:
+        
+        \begin{enumerate}
+            \item Use \verb|\bibliographystyle{}| in the preamble to set a style. Use \texttt{unsrtnat}.
+            \item Include \verb|\bibliography{}| at the end of your \texttt{document} environment to link the \texttt{bib} file to your document.
+        \end{enumerate} 
+        \textbf{Hint:} The syntax is \verb|\usepackage[option]{package}|.
+        
+        \item Write a pararaph in each section and use \verb|\cite{}| to cite two your sources.
+    \end{enumerate}
+    \item In the same document as the previous question:
+    \begin{enumerate}
+        \item Create a \verb|figures| folder and add two figures of your choosing.
+        \item Using either the \texttt{tikz} or \texttt{graphicx} package and their \verb|\includegraphics[]{}| command, add the figures to your document with a caption and label.
+        
+        \textbf{Hints:} \begin{itemize}
+            \item You may want to create a \texttt{figure} environment to enclose each image.
+            \item \verb|\includegraphics{}| has the option to adjust width with \verb|width=0.5\textwidth|, changing the fraction to whatever is appropriate. Alternatively, scale the image with \verb|scale=0.5|.
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}

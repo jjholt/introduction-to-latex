@@ -1,0 +1,130 @@
+Make sure to include the \texttt{circuitikz} package by using \verb|\usepackage{circuitikz}| in your document.
+
+\begin{enumerate}
+\item Attempt to recreate the circuit below.
+Note that you will also need the package \texttt{siunitx}.
+The objective for this exercise is simply to get it done, so no guidance of good practices will be given.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \draw (-1,-2) node[ground]{} to[short, o-o] (13.3,-2); %Ground
+        \draw [->] (-1,-1.8) -- node[fill=white]{5V}(-1,3.3); %V_in
+        \draw [->] (13.3,-1.8) -- node[fill=white]{$V_{out}$} (13.3,1.3); %V_out
+        \draw
+            (-1,3.5) to[short,o-] (0,3.5) |- (3,3.5) to[short] ++ (0,-0.5)
+            (3,3) to [R,a=$\SI{15}{k\ohm}$] (1,1) %Top left resistor
+            (3,3) to [R,l=$\SI{4.7}{k\ohm}$] (5,1) %Top right resistor
+            (1,1) to [R,a=$\SI{15}{k\ohm}$] (3,-1) %Bottom right resitor
+            (5,1) to [thermistor,l=$R_x$] (3,-1) %Bottom left resistor
+            (3,-1) to[short, -*] ++  (0,-1) %Connection to ground
+        ;
+        \node [op amp] (opamp) at (11,1.5) {}; %Create Op amp 
+        \draw
+            (opamp.out) to[short,-o] ++ (1.1,0) %Draw output to V_out
+            (5,1) to[R,l=$\SI{10}{k\ohm}$] ++(4,0) coordinate (x) |- (opamp.+)
+            (x) to[R, l=$\SI{68}{k\ohm}$] ++(0,-2) to[short,-*] ++ (0,-1)
+        ;
+        \draw
+            (1,1) -- ++ (0,2) to[crossing] ++ (0,1) %From left-bridge towards buffer
+            |- ++ (4,0.5) node[op amp, anchor=+] (buffer) {} %Create buffer
+            (buffer.-) -- ++ (0,1) -| (buffer.out) %connect inverting input and output
+            to [R,l=$\SI{10}{k\ohm}$] ++ (3,0) coordinate (y)
+            -| (opamp.-) %Betwen 10k and 68k to inverting input
+            (y) to[R,l=$\SI{68}{k\ohm}$] ++ (2.5,0)
+            |- (opamp.out) %68k to output  
+        ;
+    \end{tikzpicture}
+\end{figure}
+
+Below is a suggested order for which you can check the solutions.
+    \begin{enumerate}
+        \item Create the ground line; the input and output terminals.
+        \item Add the wheatstone bridge.
+        \item Create the bottom op amp and both resistors attached to its non-inverting input.
+        \item From the left side of the bridge to the buffer's non-inverting input.
+        \item From the buffer's inverting input to its output, then the resistors.
+    \end{enumerate}
+\clearpage
+\item While it is very similar to the previous exercise, the objective is to follow some good practices.
+\begin{figure}[h]\centering
+% Position of the bridge (top upper corner)
+    \newcommand{\x}{4.5}
+    \newcommand{\y}{6}
+    % Size of the bridge
+    \newcommand{\dx}{3}
+    \newcommand{\dy}{3}
+    \begin{circuitikz} [scale=0.8]
+    \draw
+        (0,0) to [sV, l=$A\cos(2\pi f_s t)$] (0, \y) %Voltage source 
+        to (\x, \y) 
+        % Left half bridge
+        to [R, a=$Z$, *-*] (\x-\dx,\y-\dy) coordinate (bridge-left)% Top left resistor
+        to [R=$Z$, -*] (\x,\y-2*\dy)  % Bottom left resistor
+    ;
+    \draw (\x,\y)
+        % Right half bridge
+        to [R=$L_0(1-x)$, -*] (\x+\dx, \y-\dy) coordinate (bridge-right) % Top right resistor
+        to [R=$L_0(1+x)$, -*] (\x,\y-2*\dy)  % Bottom left resistor
+        to (\x, 0) to (0,0) %Line to voltage source
+    ;
+    \draw
+        (bridge-right) to [R, a=\(R_3\)] ++ (3,0) %R_3
+        node [op amp, anchor=+](opamp) {} %Op Amp
+        to [R=\(R_4\),*-] ++ (0,-2.5) %R_4
+        node[ground]{} %Ground
+    ;
+    \draw
+        (bridge-left) -- (\x-\dx,0.8*\y) to[crossing] (\x-\dx,1.2*\y) |- (\x+\dx, 1.2*\y)
+        % (bridge-left) |- (\x+\dx, 1.2*\y)
+        -- (opamp.- -| \x+\dx, 1.2*\y) %coordinates for intercept between opamp.- and (\x+\dx, 1.2*\y)
+        to [R,a=\(R_1\),-*] (opamp.-) %R_1
+        -- ++ (0,1.5) coordinate (z) %Call it z because we don't know where it is, but need the coordinates for next line 
+        to [R=\(R_2\)] (opamp.out |- z) %R_2
+        -- (opamp.out) %Line from R_2 to opamp.out
+        to [short,*-o] ++ (0.5,0) node[right] {$V_0(t)$}
+    ;
+\end{circuitikz}
+\end{figure}
+    \begin{enumerate}
+        \item In a \texttt{figure} environment, use \verb|\newcommand| to create variables \verb|\x| = 4.5, \verb|\y| = 6; and \verb|\dx|, \verb|\dy| both equal to 3. The first two refer to the top upper corner of the bridge, while the last two are the length of the bridge.
+        
+        \item Create a \texttt{circuitikz} environment, then draw the voltage source and the left branch of the wheatstone bridge.
+        
+        \textbf{Hints:} \begin{itemize}
+            \item Create the voltage source using \verb|to[sV]| starting at \verb|(0,0)| and ending at \verb|(0,\y)|.
+            \item The top left resistor starts at \verb|(\x,\y)| and ends at \verb|(\x-\dx,\y-\dy)|.
+            \item The option \verb|*-*| places the ``connection dots'' at each extremity of a path; similarly, you can use \verb|*-| or \verb|-*| for only one extremity.
+        \end{itemize}
+            
+        \item Create the right branch of the wheatstone bridge and finish the path back to the voltage source. Include the labels for all resistors and the voltage source.
+        
+        \textbf{Hints:}
+        \begin{itemize}
+            \item The top right resistor begins at \verb|(\x,\y)| and ends at \verb|(\x+\dx, \y-\dy)|.
+            \item Both the right and left points of contact will be used again, so give them a name with \texttt{coordinate (name)}. We will use \texttt{bridge-right} and \texttt{bridge-left}.
+            \item Create the resistor labels using \verb|to[R=\(Z\)]|, \verb|to[R, a=\(Z\)| or \verb|to[R, l=\(Z\)|, depending on where you want to place them.
+        \end{itemize}
+
+        \item Starting from \verb|(\x+\dx, \y-\dy)| (or the coordinate's name), draw resistor \( R_3 \) leading into the non-inverting input of the amplifier. Then from the non-inverting input to \( R_4 \) and ground.
+        
+        \textbf{Hints:} \begin{itemize}
+            \item Use a relative distance of \verb|(3,0)| when placing \( R_3 \), then create a \texttt{node} with options \verb|op amp|, \verb|anchor=+|, and an identifier \verb|(opamp)|.
+            \item Similarly for \( R_4 \), use a relative distance of \verb|(0,-2.5)| and create a \verb|node[ground]{}| at the end.
+        \end{itemize}
+
+        \item Create the connection from the left branch to the inverting input, $R_1$, $R_2$ and $V_0(t)$.
+        
+        \textbf{Hints:}
+        \begin{itemize}
+            \item Draw lines from \texttt{(bridge-left)} to \verb|(\x+\dx, 1.2*\y)|. Use \verb!|-! instead of two discreet lines.
+            \item Draw a line from this point to its intersection with \verb|(opamp.-)|. The coordinates for this intersection are created with \verb!(opamp.- -| \x+\dx, 1.2*\y)!.
+            \item A similar technique is needed for \( R_2 \), but you may want to use relative coordinates to define its height. This means you won't know the coordinates to create an intersection, but by giving it an identifier \verb|z|, you can use \verb!(opamp.out |- z)!.
+            \item The ``open connection'' is given by the option \verb|-o|, which can be combined with the other ``connection dot''. In particular, we use \verb|[*-o]| to create the connection at \( V_0 \). 
+            \item If you want the small crossing symbol, you may need something like:
+            \begin{lstlisting}
+(bridge-left) -- (\x-\dx,0.8*\y) to[crossing] (\x-\dx,1.2*\y) |- (\x+\dx, 1.2*\y)
+            \end{lstlisting}
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}

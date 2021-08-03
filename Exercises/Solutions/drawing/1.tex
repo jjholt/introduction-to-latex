@@ -1,0 +1,12 @@
+\documentclass{article}
+\usepackage{tikz}
+\begin{document}
+    \begin{figure}[h]\centering
+        \newcommand{\x}{3}
+    \begin{tikzpicture}
+        \draw[-latex, thick] (0,0) -- (5,0) node[right]{$x$};
+        \draw[-latex, thick] (0,0) -- (0,5) node[above]{$y$};
+        \draw[] (0,0) node[below]{a} -- (\x/2,\x) node[above]{b} -- (\x+\x/2,\x)node[above]{c} -- (\x,0) node[below]{d} -- cycle;
+    \end{tikzpicture}
+    \end{figure}
+\end{document}
