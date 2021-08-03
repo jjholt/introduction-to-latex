@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[numbers]{natbib}
+\bibliographystyle{unsrtnat}
+\begin{document}
+    \section{First section}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat\cite{PendegrassCatherineJane2012Teoa}.
+        \begin{figure}[h]
+        \centering
+            \includegraphics[width=0.4\textwidth]{figures/circle.png}
+        \label{fig:circle}
+        \caption{A circle}
+        \end{figure}
+
+    \section{Second section}
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur\cite{Chimutengwende-GordonM2017Tive}. 
+        
+        \begin{figure}[h]
+        \centering
+            \includegraphics[scale=1]{figures/rectangle.png}
+        \label{fig:rectangle}
+        \caption{A rectangle}
+        \end{figure}
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+    \bibliography{bibliography.bib}
+\end{document}
