@@ -1,19 +1,33 @@
 % \section{Introduction}
-There are two ways to create a maths environment: math mode and display mode.
-\LaTeX\ is usually in text mode, but anything between \verb|$|\dots\verb|$| or \verb|\(|\dots \verb|)\| becomes math mode.
-A math environment allows subscripts, superscripts, greek letters and for most things one would associate with mathematics.
-\begin{lstlisting}
-    In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\)
-\end{lstlisting}
+\LaTeX\ is normally in text mode, but a math environment is needed to create subscripts, superscripts, greek letters and for most things one would associate with mathematics.
+This means that we have to specify when to enter a math environment, which can be broken down into in-line \emph{math mode} and \emph{display math}.
 
-In text mode. Now maths: \(x^1+\alpha_0 = y^{2x}\).
+\paragraph{In-line maths mode} is created by using \verb|\(|\dots \verb|)\|, or the \TeX{} primitive \verb|$|\dots\verb|$|.
+It is suggested that you use the \LaTeX{} \verb|\(|\dots \verb|)\|.
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.46\textwidth}
+        In text mode. Now maths: \( x^1+\alpha_0 = y^{2x} \).
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
+        \begin{lstlisting}
+In text mode. Now maths: \( x^1+\alpha_0 = y^{2x} \)
+        \end{lstlisting}
+    \end{minipage}
+\end{figure}
 
-\verb|{}| is how we indicate that everything inside the brackets should be treated together.
+\verb|{}| is how we indicate that everything inside the brackets should be kept together.
 This should become clear from the following code:
-\begin{lstlisting}
+\begin{figure}[h]
+\begin{minipage}{0.45\textwidth} \centering
     \( x^12 + x^{12} + x_0^2 + {x_0}^2 \)
-\end{lstlisting}
-and its result: \( x^12 + x^{12} + x_0^2 + {x_0}^2 \)
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+    \begin{lstlisting}
+\( x^12 + x^{12} + x_0^2 + {x_0}^2 \)
+    \end{lstlisting}    
+\end{minipage}
+\end{figure}
 
 \paragraph{Display math} can be done in several ways.
 The suggestion is using the \verb|amsmath| package, and either the \verb|align| or \verb|equation| environments.
@@ -58,8 +72,9 @@ Similarly, they can be used with \verb|\left\{  \right\}| to fix the size of \ve
 \end{figure}
 
 Because math environments change the way letters are displayed, \verb|\ln|, \verb|\sin|, \verb|\cos|, \verb|\log|, \verb|\exp| and more can be used to produce the font as we would expect. 
+Try it out for yourself to see the difference.
 
-\verb|\frac{numerator}{denominator}| produces the proper fractions \( \frac{a}{b} \). Occasionally you may find \( a/b \) more suitable.
+\verb|\frac{numerator}{denominator}| produces the proper fractions \( \frac{a}{b} \). Though bear in mind, occasionally you may still find \( a/b \) more suitable.
 
 \subsection{Making typing easier}
 A few things become very clear: There is a whole lot of syntax to remember; it is very easy to forget something and your \texttt{pdf} won't compile; and big expressions become very complicated to keep track.
@@ -221,7 +236,7 @@ See page 5 \href{https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/req
 \subsection{Calculus}
 Let's typeset derivatives from first principle and integrals from riemann sums.
 
-Try typesetting these yourself, including the organisation! You can find a solution in the \texttt{Calculus} example folder.
+You should attempt to typeset these yourself, including the organisation! You can find them in the \texttt{Examples/Calculus} folder.
 
 \subsubsection{Derivatives}
 Given an expression \( f(x) = x^2+5 \), the derivative, \( f'(x) \), from first principle is given by:

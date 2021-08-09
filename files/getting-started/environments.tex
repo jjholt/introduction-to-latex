@@ -7,7 +7,7 @@ The biggest advantage of this separation is that each content file has absolutel
 This is called \emph{Separation of concerns}, and it allows us to focus on the content completely independently from the setup and settings.
 In fact, generally we have templates and just do minor tweaks with every document.
 \clearpage
-Let's expand our working directory like seen below. These files can be found in \verb|Example2| .
+Let's expand our working directory like seen below. These files can be found in \verb|Examples/Example2| .
 \begin{verbatim}
 Example2
 ├── bibliography.bib
@@ -143,7 +143,7 @@ To be precise, it generates a \texttt{tabular} environment, so we would still wa
 \usepackage{pgfplotstable, booktabs, array}
 \end{lstlisting}
 
-The data used here is \texttt{cheese-prices.dat} in the \texttt{Example2} folder.
+The data used here is \texttt{cheese-prices.dat} in the \texttt{Examples/Example2} folder.
 \lstinputlisting[caption={\texttt{cheese-price.dat}}]{Examples/Example2/cheese-prices.dat}
 
 Then the data can be imported with \verb|\pgfplotstabletypeset{}|.

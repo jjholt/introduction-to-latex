@@ -42,7 +42,7 @@ A \texttt{report} has, in addition to the above, \verb|\part| and \verb|\chapter
 
 \lstinputlisting[language=tex, caption={\texttt{example2.tex}}]{"./files/getting-started/example2.tex"}
 
-Results in:
+Results in: \clearpage
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/sections.png}
@@ -50,7 +50,8 @@ Results in:
 \end{figure}
 
 Every tag that includes some form of counting can have an asterisk (\verb|*|) to remove the counting.
-In this case, you can see the difference between \verb|\section{}| and \verb|\section*{}|, and most importantly, the table of contents, generated with \verb|\tableofcontents|, excluded the uncounted subheader.
+In this case, you can see the difference between \verb|\section{}| and \verb|\section*{}|.
+Most importantly, the table of contents --- generated with \verb|\tableofcontents| --- excluded the uncounted subheader.
 
 The \verb|report| class also offers \verb|\chapter(*){}| and \verb|\part(*){}|, relevant mostly to very large documents.
 
@@ -75,4 +76,5 @@ For Mac, just replace \verb|Ctrl| for \verb|Cmd|.
 Quotations are done with \textasciigrave\textasciigrave text here \textquotesingle\textquotesingle.
 When you type \textasciigrave, the editor will automatically add \textquotesingle.
 
-\paragraph{Note:} Generally the suggestion is to use \verb|\emph{}| over \verb|\textit{}|. Think of it as a ``generic highlighter'' that you can modify with default behaviour to \emph{italicise}, but you could make it change colours or font size or anything else.
+\paragraph{Note:} Generally the suggestion is to use \verb|\emph{}| over \verb|\textit{}|.
+Think of it as a ``generic highlighter'' with default behaviour to \emph{italicise}, but you can modify it to change font colour, size or anything else.
