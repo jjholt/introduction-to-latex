@@ -9,27 +9,31 @@
             \label{fig:word}
         \end{figure}
 
-        The text, in the exact way it's seen, is all the information we have.
-        This is often called ``What You See Is What You Get'', or WYSIWYG for short, and refers to popular word processing programs like Word, Pages, and so on.
-        While there is a place for them, think of it as focused on only producing text, and everything else is secondary.
+        You may have tried to copy similar text and ended up with broken formatting --- mistached fonts, bad math formulas, etc.
+        That's because this is \emph{rich} text, meaning the text you see contains all the information we have, like font, size, and so on.
+        Popular word processing software, like Word, Pages, and so on, take this one step further to include a document's structure, leading to what is often called ``What You See Is What You Get'', or WYSIWYG for short.
 
-        In writing scientific papers, well typeset equations, diagrams, etc are a must.
-        For this, we can use more specialised software that handles everything exactly using code, instead of visually approximating.
+        While there is a place for WYSIWYG editors, think of them as focused on producing text, and everything else is secondary.
+        Good typesetting, well drawn diagrams, etc are absolutely essential for academic papers, so we use more specialised software that handles it more precisely.
 
     \subsection{Typesetting}
-        \LaTeX, pronounced either \emph{lah-tec} or \emph{lay-tec}, is a collection of separate programmes which take plain text and instructions and output beautifully typeset documents.
-        One of these programmes is \TeX, and it handles most of the actual typesetting (e.g. exact spacing between equatins, etc), allowing us to focus on content.
+        \LaTeX, pronounced either \emph{lah-tec} or \emph{lay-tec}, is a collection of separate programmes which takes \emph{plain} text and instructions, then compiles them into a beautifully typeset document.
+        The most important of these programmes is \TeX{}, which is responsible for the typesetting.
 
-        The main motivators for why you would want to use it are:
+        The basic premise is that we focus on creating plain text content with the use of \LaTeX, which behind-the-scenes uses \TeX{} to handle the document's structure, fonts, drawings and so on.
+        With structure and content being completely separate, it is easy to, for example, take several articles and create a uniform layout/look to them for a journal.
+        But possibly the main reason why \TeX{} and \LaTeX{} became the standard in academia is the simplicity to write mathematical expressions.
+
+        In summary, the main motivators for using \LaTeX{} are:
         \begin{enumerate}
-            \item Beautifully written documents. No more trying to deal with the various fonts, margins, spacing, etc.
-            \item Easy bibliography management, citations and cross-references
+            \item Beautifully written documents. While you can control fonts, margins, spacing, etc., they can be left to the specialists behind \TeX.  
+            \item Easy bibliography management, citations and cross-references.
             \item Easily typed equations and graphs. Even complicated maths can be easily organised and written.
         \end{enumerate}
 
-        Let's go back to our example, and see how it would be done with \LaTeX:
+        Let's go back to our example, and see how it would be created with \LaTeX:
         \lstinputlisting[language=TeX, label=ls:Laplace, caption=Example document written with \LaTeX]{files/introduction/example1.tex}
-        Resulting in:\\
+        Which gets compiled into:\\
         The Laplace transform of a function $f(t)$, defined for all real numbers $t \geq 0$ is the function $F(s)$, which is a unilateral transform defined by:
         \begin{equation*}
             F(s) = \int_0^\infty f(t)e^{-st} dt
@@ -38,29 +42,30 @@
         ---
         
         If you are familiar with programming, this may remind you of a \emph{markup} language, and that's exactly what it is!
-        In short, we have a plain text file saved in \texttt{.tex} that contains information on what is needed to compile it to \texttt{.pdf}, and what the actual document is.
+        In short, we have a plain text file saved in \texttt{.tex} that contains 1) Information on what is needed for compilation into a \texttt{.pdf}, and 2) The document's contents.
 
-        If you are used to dragging and dropping graphics into a document and spending time trying to find the exact place for it, \LaTeX\ may seem a little verbose.
-        But bear in mind, typing a line of code with auto-complete, suggestions, etc may end up quicker than doing it visually.
-        For context, this is what it would look like:
+        Another example is how to include figures into a document.
+        If you are used to a graphical interface, you usually click a few buttons, then tinker with positioning and how text wraps around the figure.
+        In contrast, with \LaTeX{} we simply issue a command and give it some options, like so:
         \begin{lstlisting}
 \includegraphics[width=0.5\textwidth]{figures/example.png}
         \end{lstlisting}
+        This may seem verbose, but bear in mind that typing a line of code with auto-complete, suggestions, etc is often much quicker than interacting with a graphical interface.
 
-        Let's briefly explore some key \LaTeX\ concepts.
-        Don't worry about fully understanding them now.
-        At this stage, the purpose is simply understanding what to expect.
-
+        Let's briefly explore some key \LaTeX{} concepts.
 \section{Markup language}
-    Plain text is written like plain text, but most of LaTeX's power comes from its markups.
-    A backslash, \verb|\|, creates a markup; curly brackets \verb|{}| indicate an \emph{argument}, and square brackets \verb|[]| (optionally) provide options.
-    So \verb|\section{Introduction}| would create an Introduction header at a \texttt{section} level (similar to H1 in Word). 
+    Sentences are written in plain text, but most of LaTeX's power comes from the use of its \emph{markups}.
+    A backslash, \verb|\|, followed by a word indicates a markup; like \verb|\alpha| producing \( \alpha \) or \verb|\pagebreak| creating a page break.
+    
+    Curly brackets, \verb|{}|, indicate an \emph{argument}, and square brackets \verb|[]| (optionally) provide options.
+    So \verb|\section{Introduction}| would create an Introduction header at a \texttt{section} level, similar to a H1 header in Word.
     \verb|\includegraphics{}|, as we saw earlier, includes the graphic given as an argument.
 
-    Generally, we are either creating an environment, defining instructions or using variables:
+    Generally, markups are used to either create \emph{environments}, give instructions/commands, or utilise variables \footnotemark.
+    \footnotetext{This division is completely arbitrary, as you may notice from the syntax, but you may find it helpful to think of it this way.}
 
     \paragraph{Environments:}
-    introduce some kind of formatting, such as lists, math mode or more complicated things.
+    introduce some kind of formatting, such as where the document begins, lists, math mode or more complicated things.
     With very few exceptions, environments have the following format:
         
     \begin{lstlisting}
@@ -71,7 +76,7 @@
         
     In our example, we created both the required \texttt{document} environment, and the math display \texttt{equation*}.
         
-    \paragraph{Instructions:}
+    \paragraph{Instructions/commands:}
     define some feature of the document. This ranges from breaking a page, to creating double-spacing, defining the document's class, and much more. In our example you can see:
 
     \verb|\documentclass[...]{article}|
@@ -97,8 +102,8 @@
     This means that our \texttt{.tex} files can be written in any text editing software \verb|.tex|, and to produce the output \verb|.pdf|, it needs to be \emph{compiled}.
 
     You may spend a lot of time scratching your head, wondering what is wrong with your code and why it's not compiling.
-    We very specifically will avoid most of the programming side of \TeX, which is some kind of macro expansion language.
-    You will still run into some challenges, but they tend to be forgetting a bracket, rather than unexpected behaviour.
+    We very specifically will avoid most of the programming side of \TeX, which is a kind of macro expansion language.
+    You will still run into some challenges, but they tend to be about forgetting brackets, rather than bugs causing unexpected behaviour.
 
-    We are not going to focus on the various compilers, and just use \texttt{latexmk}, or whichever is default in your distribution.
-    The good news is that the recommended IDEs (\textbf{I}ntegrated \textbf{D}evelopment \textbf{E}nvironments, basically text editors filled with features) handle the compilation for you and have features to help you spot mistakes.
+    We are not going to focus on the various compilers, and just use \texttt{latexmk}, or whichever is default in your \LaTeX{} distribution.
+    The good news is that the recommended IDEs (\textbf{I}ntegrated \textbf{D}evelopment \textbf{E}nvironments) handle the compilation for us and have features to help spot mistakes.
