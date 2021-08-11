@@ -1,7 +1,16 @@
 A LaTeX file has a \verb|.tex| extension, and begins with what we call a \emph{preamble} --- declaring the \emph{class} of document, followed by \verb|\begin{document}...\end{document}|.
-\lstinputlisting[language=tex,caption={\texttt{example.tex}}]{files/getting-started/example1.tex}
 
-Producing the following output:
+\begin{lstlisting}[caption=\texttt{example.tex}]
+\documentclass[12pt]{article}
+\begin{document}
+    This is the first sentence of the first paragraph. Second sentence of first paragraph.
+    Third sentence first paragraph.
+
+    This is the second paragraph
+\end{document}
+\end{lstlisting}
+
+Which when compiled produces the following output:
 
 \begin{figure}[h]
     \centering
@@ -40,7 +49,19 @@ If you really want to force a paragraph without indentation, use \verb|\\| at th
 Documents with the \texttt{article} class are primarily separated into \verb|section|, \verb|subsection|, \verb|\subsubsection| and \verb|paragraph|, with the first two showing up in a table of contents.
 A \texttt{report} has, in addition to the above, \verb|\part| and \verb|\chapter|.
 
-\lstinputlisting[language=tex, caption={\texttt{example2.tex}}]{"./files/getting-started/example2.tex"}
+\begin{lstlisting}[caption=\texttt{example2.tex}]
+\documentclass{article}
+\begin{document}
+    \tableofcontents
+    \section{First header}
+        text text.
+        \subsection{Counted subheader}
+            \paragraph{Leading text}
+                normal text that follows.
+        \subsection*{Uncounted subheader}
+    \section{Second header}
+\end{document}
+\end{lstlisting}
 
 Results in: \clearpage
 \begin{figure}[h]
