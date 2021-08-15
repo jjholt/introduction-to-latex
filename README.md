@@ -1,6 +1,10 @@
 # Introduction to LaTeX 
 A simple introduction to LaTeX for UCL's engineering faculty
- 
+
+# Release Instructions
+1. Compile both `Exercises.tex` and `Introduction.tex`.
+2. Include the folders `Examples`, `Templates` and `Solutions`.
+
 ----------
 # Learning Objectives
 ## General Understanding
