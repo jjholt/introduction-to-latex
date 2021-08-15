@@ -45,9 +45,7 @@ Take the examples highlighted here as graphs we do often, but it is highly recom
 \texttt{axis} is the most common axis environment, but we can also use \texttt{semilog\underline{x}axis}, \texttt{semilog\underline{y}axis} and \texttt{loglogaxis} for our logarithmic axis needs, \texttt{polaraxis}, and more.
 There are hundreds of options with names that tend to be self-evident, and the best approach is to search for examples and modify them to your needs.
 \begin{lstlisting}
-    \begin{axis}[
-        %options here separate by commas,
-    ]
+    \begin{axis}[ options here separate by commas, ]
         %plots here separated by colons;
     \end{axis}
 \end{lstlisting} 
@@ -59,17 +57,19 @@ Generally you will want to have the domain defined in the \texttt{axis} environm
 We created legends by using \verb|\addlegendentry{}|, but we also have the option of using \verb|\legend{}| and describing them all in one place, as will be seen in the next example.
 
 We have a lot of freedom with the frequency of the label ticks, whether you want them replaced with text, minimum and maximum displayed values.
-Changing the options of our plot to the following, and adding a dashed-line plot gives us the graph seen below.
+In facts, with minor alterations to the previous example, we can get the following graph:
+
 \begin{figure}[h]
 \centering
 \begin{minipage}{0.45\textwidth}
-    \begin{tikzpicture}
-        \begin{axis} [
-            xlabel=\(x\), ylabel=\(f(x)\),
-            legend pos = north west,
-            domain=-5:5, axis lines = center,
-            ytick={-100,0,75}, 
-        ]
+    \begin{tikzpicture}[scale=0.9]
+        \begin{axis}
+            [
+                xlabel=\(x\), ylabel=\(f(x)\),
+                legend pos = north west,
+                domain=-5:5, axis lines = center,
+                ytick={-100,0,75},
+            ]
             \addplot[blue, thick] {x^2};
             \addlegendentry{\(x^2\)}
             \addplot[red] {x^3+2};
