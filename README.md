@@ -30,7 +30,8 @@ A simple introduction to LaTeX for UCL's engineering faculty
 
 ## Mathematics
 1. Inline and display math: `$$` or `\( \)`, `align(*)`, `cases`, `bmatrix`
-2. Vector notation (`\vec{}`) and greek letters: `\alpha`, `\beta`, `\varfi`,...
+2. Integrals, sums, limits,...
+3. Vector notation (`\vec{}`) and greek letters: `\alpha`, `\beta`, `\varfi`,...
 
 ## Native Graphing
 ### `Tikz`
