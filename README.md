@@ -1,7 +1,10 @@
 # Introduction to LaTeX 
 A simple introduction to LaTeX for UCL's engineering faculty
 
-# Release Instructions
+To download it, head on to the [Releases](https://github.com/jjholt/introduction-to-latex/releases) page and download at least `Introduction.pdf`.
+The zipped folders are the exact same as in the source, but if you are a bit lost, download at least `Examples.zip` and `Solutions.zip` as well.
+
+# Compilation
 1. Compile both `Exercises.tex` and `Introduction.tex`.
 2. Include the folders `Examples`, `Templates` and `Solutions`.
 
